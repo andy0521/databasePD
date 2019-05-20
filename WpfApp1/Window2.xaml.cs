@@ -29,7 +29,7 @@ namespace WpfApp1
             this.setConnection();
             InitializeComponent();
             this.updateDataGrid();
-            specialization_btn.IsEnabled = false;
+            specialization_btn.IsEnabled =false;
         }
         protected override void OnClosed(EventArgs e)
         {
