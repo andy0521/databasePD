@@ -34,13 +34,18 @@ namespace WpfApp1
         private void updateDataGrid()
         {
             OracleCommand cmd = con.CreateCommand();
+     
             cmd.CommandText = "select*from player_character";
             cmd.CommandType = CommandType.Text;
+            
+          
+
             OracleDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            myDataGrid.ItemsSource = dt.DefaultView;
+              DataTable dt = new DataTable();
+             dt.Load(dr);
+             myDataGrid.ItemsSource = dt.DefaultView;
             dr.Close();
+         
         }
         private void setConnection()
         {
@@ -65,8 +70,8 @@ namespace WpfApp1
 
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into player_character(player_id,nickname,player_level,specialization_id,weapen_id,armor_id)" +
-                "values(:player_id,:nickname,:player_level,:specialization_id,:weapen_id,:armor_id)";
+            String sql = "insert into player_character(player_id,nickname,player_level,specialization_id,weapon_id,armor_id)" +
+                "values(:player_id,:nickname,:player_level,:specialization_id,:weapon_id,:armor_id)";
             this.AUD(sql,0);
             add_btn.IsEnabled =  false;
             update_btn.IsEnabled = true;
@@ -80,7 +85,7 @@ namespace WpfApp1
 
             String sql = "update player_character set nickname = :nickname ," +
                 " player_level= :player_level , specialization_id = :specialization_id , " +
-                "weapen_id = :weapen_id , armor_id = :armor_id  " +
+                "weapon_id = :weapon_id , armor_id = :armor_id  " +
                 "where player_id = :player_id";
             this.AUD(sql,1);
 
@@ -99,7 +104,7 @@ namespace WpfApp1
             Nickname_txbx.Text = "";
             Player_Level_txbx.Text = "";
             Specialization_Id_txbx.Text = "";
-            Weapen_Id_txbx.Text = "";
+            Weapon_Id_txbx.Text = "";
             Armor_Id_txbx.Text = "";
 
             add_btn.IsEnabled = true;
@@ -125,7 +130,7 @@ namespace WpfApp1
                     cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = Nickname_txbx.Text;
                     cmd.Parameters.Add("Player_Level", OracleDbType.Int32,2).Value = Int32.Parse(Player_Level_txbx.Text);
                     cmd.Parameters.Add("Specialization_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
-                    cmd.Parameters.Add("Weapen_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapen_Id_txbx.Text);
+                    cmd.Parameters.Add("Weapon_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapon_Id_txbx.Text);
                     cmd.Parameters.Add("Armor_id", OracleDbType.Int32, 3).Value = Int32.Parse(Armor_Id_txbx.Text);
 
                     break;
@@ -134,7 +139,7 @@ namespace WpfApp1
                     cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = Nickname_txbx.Text;
                     cmd.Parameters.Add("Player_Level", OracleDbType.Int32, 2).Value = Int32.Parse(Player_Level_txbx.Text);
                     cmd.Parameters.Add("Specialization_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
-                    cmd.Parameters.Add("Weapen_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapen_Id_txbx.Text);
+                    cmd.Parameters.Add("Weapon_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapon_Id_txbx.Text);
                     cmd.Parameters.Add("Armor_id", OracleDbType.Int32, 3).Value = Int32.Parse(Armor_Id_txbx.Text);
 
                     cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
@@ -152,6 +157,7 @@ namespace WpfApp1
             try
             {
                 int n = cmd.ExecuteNonQuery();
+
                 if(n  > 0)
                 {
 
@@ -160,7 +166,8 @@ namespace WpfApp1
                 }
             }
             catch(Exception expe)    {
-            
+                MessageBox.Show("Error");
+                add_btn.IsEnabled = true;
             }
         }
 
@@ -175,7 +182,7 @@ namespace WpfApp1
                 Nickname_txbx.Text = dr["nickname"].ToString();
                 Player_Level_txbx.Text = dr["Player_Level"].ToString();
                 Specialization_Id_txbx.Text = dr["Specialization_Id"].ToString();
-                Weapen_Id_txbx.Text = dr["Weapen_Id"].ToString();
+                Weapon_Id_txbx.Text = dr["Weapon_Id"].ToString();
                 Armor_Id_txbx.Text = dr["Armor_Id"].ToString();
                 add_btn.IsEnabled = false;
                 update_btn.IsEnabled = true;
@@ -195,13 +202,13 @@ namespace WpfApp1
             new Window2().ShowDialog();
         }
 
-        private void Weapen_type_btn_Click(object sender, RoutedEventArgs e)
+        private void Weapon_type_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             new Window3().ShowDialog();
         }
 
-        private void Weapen_btn_Click(object sender, RoutedEventArgs e)
+        private void Weapon_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             new Window4().ShowDialog();

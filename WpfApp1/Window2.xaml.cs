@@ -198,13 +198,13 @@ namespace WpfApp1
             new Window2().ShowDialog();
         }
 
-        private void Weapen_type_btn_Click(object sender, RoutedEventArgs e)
+        private void Weapon_type_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             new Window3().ShowDialog();
         }
 
-        private void Weapen_btn_Click(object sender, RoutedEventArgs e)
+        private void Weapon_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             new Window4().ShowDialog();

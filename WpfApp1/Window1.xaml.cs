@@ -39,7 +39,7 @@ namespace WpfApp1
         private void updateDataGrid()
         {
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select*from player_info";
+            cmd.CommandText = "select * from player_info";
             cmd.CommandType = CommandType.Text;
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
@@ -160,6 +160,10 @@ namespace WpfApp1
             catch (Exception expe)
             {
 
+                this.resetAll();
+                MessageBox.Show("Error");
+                
+
             }
         }
 
@@ -174,8 +178,10 @@ namespace WpfApp1
                 Password_txbx.Text = dr["Password"].ToString();
                 email_txbx.Text = dr["email"].ToString();
                 tel_txbx.Text = dr["tel"].ToString();
-
-                add_btn.IsEnabled = false;
+               
+                
+                    add_btn.IsEnabled = false;
+                
                 update_btn.IsEnabled = true;
                 delete_btn.IsEnabled = true;
             }
@@ -200,13 +206,13 @@ namespace WpfApp1
             new Window2().ShowDialog();
         }
 
-        private void Weapen_type_btn_Click(object sender, RoutedEventArgs e)
+        private void Weapon_type_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             new Window3().ShowDialog();
         }
 
-        private void Weapen_btn_Click(object sender, RoutedEventArgs e)
+        private void Weapon_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             new Window4().ShowDialog();
