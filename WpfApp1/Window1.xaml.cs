@@ -80,7 +80,7 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "update player_character set password = :password ," +
+            String sql = "update player_info set password = :password ," +
                 " email= :email , tel = :tel  " +
                 "where player_id = :player_id";
             this.AUD(sql, 1);
@@ -89,7 +89,7 @@ namespace WpfApp1
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "delete from  player_character " +
+            String sql = "delete from  player_info " +
                 "where player_id = :player_id";
             this.AUD(sql, 2);
             this.resetAll();
