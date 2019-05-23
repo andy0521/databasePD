@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="543.171" Width="927.86" Loaded="Window_Loaded" Closed="Window_Closed">
+        Title="Player Character" Height="543.171" Width="927.86" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid Margin="0,0,3.333,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="0*"/>
