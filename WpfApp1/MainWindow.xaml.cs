@@ -217,6 +217,13 @@ namespace WpfApp1
         private void Armor_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
+            new Window5().ShowDialog();
+        }
+
+        private void Player_level_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window6().ShowDialog();
         }
     }
 }
