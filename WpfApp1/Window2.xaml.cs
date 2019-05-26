@@ -127,7 +127,7 @@ namespace WpfApp1
             {
                 case 0:
                     msg = "Row Inserted Successfully!";
-                    cmd.Parameters.Add("spec_id", OracleDbType.Varchar2, 16).Value = spec_id_txbx.Text;
+                    cmd.Parameters.Add("spec_id", OracleDbType.Int32, 2).Value = Int32.Parse(spec_id_txbx.Text);
                     cmd.Parameters.Add("spec_name", OracleDbType.Varchar2, 16).Value = spec_name_txbx.Text;
                     cmd.Parameters.Add("hp_weighted", OracleDbType.Varchar2, 50).Value =hp_weight_txbx.Text;
                     cmd.Parameters.Add("mp_weighted", OracleDbType.Varchar2, 20).Value = mp_weight_txbx.Text;
@@ -135,7 +135,7 @@ namespace WpfApp1
                     cmd.Parameters.Add("magic_damage_weighted", OracleDbType.Varchar2, 20).Value = magic_damage_txbx.Text;
                     cmd.Parameters.Add("phy_defense_weighted", OracleDbType.Varchar2, 20).Value = phy_defense_txbx.Text;
                     cmd.Parameters.Add("magic_defense_weighted", OracleDbType.Varchar2, 20).Value = magic_defense_txbx.Text;
-                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Varchar2, 20).Value = weapon_type_txbx.Text;
+                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_txbx.Text);
 
 
                     break;
@@ -148,9 +148,9 @@ namespace WpfApp1
                     cmd.Parameters.Add("magic_damage_weighted", OracleDbType.Varchar2, 20).Value = magic_damage_txbx.Text;
                     cmd.Parameters.Add("phy_defense_weighted", OracleDbType.Varchar2, 20).Value = phy_defense_txbx.Text;
                     cmd.Parameters.Add("magic_defense_weighted", OracleDbType.Varchar2, 20).Value = magic_defense_txbx.Text;
-                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Varchar2, 20).Value = weapon_type_txbx.Text;
+                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Varchar2, 20).Value = Int32.Parse(weapon_type_txbx.Text);
 
-                    cmd.Parameters.Add("spec_id", OracleDbType.Varchar2, 16).Value = spec_id_txbx.Text;
+                    cmd.Parameters.Add("spec_id", OracleDbType.Int32, 2).Value = Int32.Parse(spec_id_txbx.Text);
 
 
                     break;
@@ -234,7 +234,9 @@ namespace WpfApp1
         private void Armor_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
+            new Window5().ShowDialog();
         }
+
         private void Player_level_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();

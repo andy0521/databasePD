@@ -22,7 +22,7 @@
 
 
         </GroupBox>
-        <DataGrid x:Name="myDataGrid" HorizontalAlignment="Left" Height="386" Margin="318.333,10,0,0" VerticalAlignment="Top" Width="415" SelectionChanged="MyDataGrid_SelectionChanged" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <DataGrid x:Name="myDataGrid" HorizontalAlignment="Left" Height="439" Margin="318,10,0,0" VerticalAlignment="Top" Width="491" SelectionChanged="MyDataGrid_SelectionChanged" Grid.Column="2" Grid.RowSpan="2"/>
         <Label Content="specialization_Id" HorizontalAlignment="Left" Margin="25.333,131,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
         <Label Content="specialization_name" HorizontalAlignment="Left" Margin="25.333,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.491,-2.648" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
         <Label Content="hp_weight" HorizontalAlignment="Left" Margin="25.333,192,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>

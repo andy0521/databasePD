@@ -38,7 +38,7 @@ namespace WpfApp1
         private void updateDataGrid()
         {
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select*from player_info";
+            cmd.CommandText = "select*from weapon_type";
             cmd.CommandType = CommandType.Text;
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
@@ -67,8 +67,8 @@ namespace WpfApp1
         }
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into player_info(player_id,password,email,tel)" +
-                "values(:player_id,:password,:email,:tel)";
+            String sql = "insert into weapon_type(weapon_type_id,weapon_type_name)" +
+                "values(:weapon_type_id,:weapon_type_name)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;
             update_btn.IsEnabled = true;
@@ -79,9 +79,8 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "update player_character set password = :password ," +
-                " email= :email , tel = :tel  " +
-                "where player_id = :player_id";
+            String sql = "update weapon_type set weapon_type_name = :weapon_type_name " +
+                "where weapon_type_id = :weapon_type_id";
             this.AUD(sql, 1);
 
         }
@@ -89,18 +88,16 @@ namespace WpfApp1
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
             
-            String sql = "delete from  player_character " +
-                "where player_id = :player_id";
+            String sql = "delete from  weapon_type " +
+                "where weapon_type_id = :weapon_type_id";
             this.AUD(sql, 2);
             this.resetAll();
         }
         private void resetAll()
         {
-            Player_Id_txbx.Text = "";
-            Password_txbx.Text = "";
-            email_txbx.Text = "";
-            tel_txbx.Text = "";
-
+            weapon_type_id_txbx.Text = "";
+            weapon_type_name_txbx.Text = "";
+     
 
             add_btn.IsEnabled = true;
             update_btn.IsEnabled = false;
@@ -121,28 +118,22 @@ namespace WpfApp1
             {
                 case 0:
                     msg = "Row Inserted Successfully!";
-                    cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
-                    cmd.Parameters.Add("Password", OracleDbType.Varchar2, 16).Value = Password_txbx.Text;
-                    cmd.Parameters.Add("email", OracleDbType.Varchar2, 50).Value = email_txbx.Text;
-                    cmd.Parameters.Add("tel", OracleDbType.Varchar2, 20).Value = tel_txbx.Text;
-
+                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = weapon_type_id_txbx.Text;
+                    cmd.Parameters.Add("weapon_type_name", OracleDbType.Varchar2, 20).Value = weapon_type_name_txbx.Text;
+                
 
                     break;
                 case 1:
                     msg = "Row Update Successfully!";
-                    cmd.Parameters.Add("Password", OracleDbType.Varchar2, 16).Value = Password_txbx.Text;
-                    cmd.Parameters.Add("email", OracleDbType.Varchar2, 50).Value = email_txbx.Text;
-                    cmd.Parameters.Add("tel", OracleDbType.Varchar2, 20).Value = tel_txbx.Text;
-
-
-                    cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
+                    cmd.Parameters.Add("weapon_type_name", OracleDbType.Varchar2, 20).Value = weapon_type_name_txbx.Text;
+                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_id_txbx.Text);
 
 
                     break;
                 case 2:
                     msg = "Row Delete Successfully!";
 
-                    cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
+                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_id_txbx.Text);
 
                     break;
 
@@ -170,11 +161,9 @@ namespace WpfApp1
             DataRowView dr = dg.SelectedItem as DataRowView;
             if (dr != null)
             {
-                Player_Id_txbx.Text = dr["player_id"].ToString();
-                Password_txbx.Text = dr["Password"].ToString();
-                email_txbx.Text = dr["email"].ToString();
-                tel_txbx.Text = dr["tel"].ToString();
-
+                weapon_type_id_txbx.Text = dr["weapon_type_id"].ToString();
+                weapon_type_name_txbx.Text = dr["weapon_type_name"].ToString();
+            
                 add_btn.IsEnabled = false;
                 update_btn.IsEnabled = true;
                 delete_btn.IsEnabled = true;
@@ -214,7 +203,9 @@ namespace WpfApp1
         private void Armor_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
+            new Window5().ShowDialog();
         }
+
         private void Player_level_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
