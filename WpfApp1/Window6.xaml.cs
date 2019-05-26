@@ -132,25 +132,25 @@ namespace WpfApp1
             {
                 case 0:
                     msg = "Row Inserted Successfully!";
-                    cmd.Parameters.Add("player_level", OracleDbType.Varchar2, 16).Value = player_level_txbx.Text;
-                    cmd.Parameters.Add("hp_base", OracleDbType.Varchar2, 12).Value = hp_base_txbx.Text;
-                    cmd.Parameters.Add("mp_base", OracleDbType.Int32, 2).Value = Int32.Parse(mp_base_txbx.Text);
-                    cmd.Parameters.Add("pda_base", OracleDbType.Int32, 2).Value = Int32.Parse(pda_base_txbx.Text);
-                    cmd.Parameters.Add("mda_base", OracleDbType.Int32, 3).Value = Int32.Parse(mda_base_txbx.Text);
-                    cmd.Parameters.Add("pde_base", OracleDbType.Int32, 3).Value = Int32.Parse(pde_base_txbx.Text);
-                    cmd.Parameters.Add("mde_base", OracleDbType.Int32, 3).Value = Int32.Parse(mde_base_txbx.Text);
+                    cmd.Parameters.Add("player_level", OracleDbType.Int32, 3).Value = Int32.Parse(player_level_txbx.Text);
+                    cmd.Parameters.Add("hp_base", OracleDbType.Int32, 5).Value = Int32.Parse(hp_base_txbx.Text);
+                    cmd.Parameters.Add("mp_base", OracleDbType.Int32, 5).Value = Int32.Parse(mp_base_txbx.Text);
+                    cmd.Parameters.Add("pda_base", OracleDbType.Int32, 5).Value = Int32.Parse(pda_base_txbx.Text);
+                    cmd.Parameters.Add("mda_base", OracleDbType.Int32, 5).Value = Int32.Parse(mda_base_txbx.Text);
+                    cmd.Parameters.Add("pde_base", OracleDbType.Int32, 4).Value = Int32.Parse(pde_base_txbx.Text);
+                    cmd.Parameters.Add("mde_base", OracleDbType.Int32, 4).Value = Int32.Parse(mde_base_txbx.Text);
 
                     break;
                 case 1:
                     msg = "Row Update Successfully!";
-                    cmd.Parameters.Add("hp_base", OracleDbType.Varchar2, 12).Value = hp_base_txbx.Text;
-                    cmd.Parameters.Add("mp_base", OracleDbType.Int32, 2).Value = Int32.Parse(mp_base_txbx.Text);
-                    cmd.Parameters.Add("pda_base", OracleDbType.Int32, 2).Value = Int32.Parse(pda_base_txbx.Text);
-                    cmd.Parameters.Add("mda_base", OracleDbType.Int32, 3).Value = Int32.Parse(mda_base_txbx.Text);
-                    cmd.Parameters.Add("pde_base", OracleDbType.Int32, 3).Value = Int32.Parse(pde_base_txbx.Text);
-                    cmd.Parameters.Add("mde_base", OracleDbType.Int32, 3).Value = Int32.Parse(mde_base_txbx.Text);
+                    cmd.Parameters.Add("hp_base", OracleDbType.Int32,5 ).Value = Int32.Parse(hp_base_txbx.Text);
+                    cmd.Parameters.Add("mp_base", OracleDbType.Int32, 5).Value = Int32.Parse(mp_base_txbx.Text);
+                    cmd.Parameters.Add("pda_base", OracleDbType.Int32, 5).Value = Int32.Parse(pda_base_txbx.Text);
+                    cmd.Parameters.Add("mda_base", OracleDbType.Int32, 5).Value = Int32.Parse(mda_base_txbx.Text);
+                    cmd.Parameters.Add("pde_base", OracleDbType.Int32, 4).Value = Int32.Parse(pde_base_txbx.Text);
+                    cmd.Parameters.Add("mde_base", OracleDbType.Int32, 4).Value = Int32.Parse(mde_base_txbx.Text);
 
-                    cmd.Parameters.Add("player_level", OracleDbType.Varchar2, 16).Value = player_level_txbx.Text;
+                    cmd.Parameters.Add("player_level", OracleDbType.Int32, 3).Value = Int32.Parse(player_level_txbx.Text);
 
 
                     break;
