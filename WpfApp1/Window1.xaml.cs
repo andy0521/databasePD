@@ -194,10 +194,12 @@ namespace WpfApp1
 
         private void Player_Character_btn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            
             MainWindow mw = new MainWindow();
-
+            this.Hide();
             mw.Show();
+            
+
         }
 
         private void Specialization_btn_Click(object sender, RoutedEventArgs e)
@@ -222,6 +224,12 @@ namespace WpfApp1
         {
             this.Hide();
         }
-        
+        private void Player_level_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window6().ShowDialog();
+        }
+
+
     }
 }
