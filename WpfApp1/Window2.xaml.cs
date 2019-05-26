@@ -148,7 +148,7 @@ namespace WpfApp1
                     cmd.Parameters.Add("magic_damage_weighted", OracleDbType.Varchar2, 20).Value = magic_damage_txbx.Text;
                     cmd.Parameters.Add("phy_defense_weighted", OracleDbType.Varchar2, 20).Value = phy_defense_txbx.Text;
                     cmd.Parameters.Add("magic_defense_weighted", OracleDbType.Varchar2, 20).Value = magic_defense_txbx.Text;
-                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Varchar2, 20).Value = Int32.Parse(weapon_type_txbx.Text);
+                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_txbx.Text);
 
                     cmd.Parameters.Add("spec_id", OracleDbType.Int32, 2).Value = Int32.Parse(spec_id_txbx.Text);
 

@@ -39,7 +39,7 @@ namespace WpfApp1
         {
             OracleCommand cmd = con.CreateCommand();
 
-            cmd.CommandText = "select*from player_character";
+            cmd.CommandText = "select*from armor";
             cmd.CommandType = CommandType.Text;
 
 
@@ -75,8 +75,8 @@ namespace WpfApp1
 
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into player_character(player_id,nickname,player_level,specialization_id,weapon_id,armor_id)" +
-                "values(:player_id,:nickname,:player_level,:specialization_id,:weapon_id,:armor_id)";
+            String sql = "insert into armor(armor_id,armor_name,pd_weighted,md_weighted,speed_weighted,dodge_weighted,hp_plus,mp_plus,durability)" +
+                "values(:armor_id,:armor_name,:pd_weighted,:md_weighted,:speed_weighted,:dodge_weighted,:hp_plus,:mp_plus,:durability)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;
             update_btn.IsEnabled = true;
@@ -88,29 +88,33 @@ namespace WpfApp1
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
 
-            String sql = "update player_character set nickname = :nickname ," +
-                " player_level= :player_level , specialization_id = :specialization_id , " +
-                "weapon_id = :weapon_id , armor_id = :armor_id  " +
-                "where player_id = :player_id";
+            String sql = "update armor set armor_name = :armor_name ," +
+                " pd_weighted= :pd_weighted , md_weighted = :md_weighted , " +
+                "speed_weighted = :speed_weighted , dodge_weighted = :dodge_weighted, " +
+                  "hp_plus = :hp_plus , mp_plus = :mp_plus ," +"durability = :durability " +
+                "where armor_id = :armor_id";
             this.AUD(sql, 1);
 
         }
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "delete from  player_character " +
-                "where player_id = :player_id";
+            String sql = "delete from  armor " +
+                "where armor_id = :armor_id";
             this.AUD(sql, 2);
             this.resetAll();
         }
         private void resetAll()
         {
-            Player_Id_txbx.Text = "";
-            Nickname_txbx.Text = "";
-            Player_Level_txbx.Text = "";
-            Specialization_Id_txbx.Text = "";
-            Weapon_Id_txbx.Text = "";
-            Armor_Id_txbx.Text = "";
+            armor_id_txbx.Text = "";
+            armor_name_txbx.Text = "";
+            pd_weighted_txbx.Text = "";
+            md_weighted_txbx.Text = "";
+            speed_weighted_txbx.Text = "";
+            dodge_weighted_txbx.Text = "";
+            hp_plus_txbx.Text = "";
+            mp_plus_txbx.Text = "";
+            durability_txbx.Text = "";
 
             add_btn.IsEnabled = true;
             update_btn.IsEnabled = false;
@@ -131,30 +135,36 @@ namespace WpfApp1
             {
                 case 0:
                     msg = "Row Inserted Successfully!";
-                    cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
-                    cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = Nickname_txbx.Text;
-                    cmd.Parameters.Add("Player_Level", OracleDbType.Int32, 2).Value = Int32.Parse(Player_Level_txbx.Text);
-                    cmd.Parameters.Add("Specialization_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
-                    cmd.Parameters.Add("Weapon_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapon_Id_txbx.Text);
-                    cmd.Parameters.Add("Armor_id", OracleDbType.Int32, 3).Value = Int32.Parse(Armor_Id_txbx.Text);
-
+                    cmd.Parameters.Add("armor_id", OracleDbType.Varchar2, 16).Value = armor_id_txbx.Text;
+                    cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = armor_name_txbx.Text;
+                    cmd.Parameters.Add("pd_weighted", OracleDbType.Int32, 2).Value = Int32.Parse(pd_weighted_txbx.Text);
+                    cmd.Parameters.Add("md_weighted", OracleDbType.Int32, 2).Value = Int32.Parse(md_weighted_txbx.Text);
+                    cmd.Parameters.Add("speed_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(speed_weighted_txbx.Text);
+                    cmd.Parameters.Add("dodge_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(dodge_weighted_txbx.Text);
+                    cmd.Parameters.Add("hp_plus", OracleDbType.Int32, 5).Value = Int32.Parse(hp_plus_txbx.Text);
+                    cmd.Parameters.Add("mp_plus", OracleDbType.Int32, 5).Value = Int32.Parse(mp_plus_txbx.Text);
+                    cmd.Parameters.Add("durability", OracleDbType.Int32, 3).Value = Int32.Parse(durability_txbx.Text);
                     break;
                 case 1:
                     msg = "Row Update Successfully!";
-                    cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = Nickname_txbx.Text;
-                    cmd.Parameters.Add("Player_Level", OracleDbType.Int32, 2).Value = Int32.Parse(Player_Level_txbx.Text);
-                    cmd.Parameters.Add("Specialization_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
-                    cmd.Parameters.Add("Weapon_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapon_Id_txbx.Text);
-                    cmd.Parameters.Add("Armor_id", OracleDbType.Int32, 3).Value = Int32.Parse(Armor_Id_txbx.Text);
+                    cmd.Parameters.Add("armor_name", OracleDbType.Varchar2, 20).Value = armor_name_txbx.Text;
+                    cmd.Parameters.Add("pd_weighted", OracleDbType.Int32, 2).Value = Int32.Parse(pd_weighted_txbx.Text);
+                    cmd.Parameters.Add("md_weighted", OracleDbType.Int32, 2).Value = Int32.Parse(md_weighted_txbx.Text);
+                    cmd.Parameters.Add("speed_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(speed_weighted_txbx.Text);
+                    cmd.Parameters.Add("dodge_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(dodge_weighted_txbx.Text);
+                    cmd.Parameters.Add("hp_plus", OracleDbType.Int32, 5).Value = Int32.Parse(hp_plus_txbx.Text);
+                    cmd.Parameters.Add("mp_plus", OracleDbType.Int32, 5).Value = Int32.Parse(mp_plus_txbx.Text);
+                    cmd.Parameters.Add("durability", OracleDbType.Int32, 3).Value = Int32.Parse(durability_txbx.Text);
 
-                    cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
+
+                    cmd.Parameters.Add("armor_id", OracleDbType.Int32,4).Value = Int32.Parse(armor_id_txbx.Text);
 
 
                     break;
                 case 2:
                     msg = "Row Delete Successfully!";
 
-                    cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
+                    cmd.Parameters.Add("armor_id", OracleDbType.Varchar2, 16).Value = armor_id_txbx.Text;
 
                     break;
 
@@ -184,12 +194,15 @@ namespace WpfApp1
             DataRowView dr = dg.SelectedItem as DataRowView;
             if (dr != null)
             {
-                Player_Id_txbx.Text = dr["player_id"].ToString();
-                Nickname_txbx.Text = dr["nickname"].ToString();
-                Player_Level_txbx.Text = dr["Player_Level"].ToString();
-                Specialization_Id_txbx.Text = dr["Specialization_Id"].ToString();
-                Weapon_Id_txbx.Text = dr["Weapon_Id"].ToString();
-                Armor_Id_txbx.Text = dr["Armor_Id"].ToString();
+                armor_id_txbx.Text = dr["armor_id"].ToString();
+                armor_name_txbx.Text = dr["armor_name"].ToString();
+                pd_weighted_txbx.Text = dr["pd_weighted"].ToString();
+                md_weighted_txbx.Text = dr["md_weighted"].ToString();
+                speed_weighted_txbx.Text = dr["speed_weighted"].ToString();
+                dodge_weighted_txbx.Text = dr["dodge_weighted"].ToString();
+                hp_plus_txbx.Text = dr["hp_plus"].ToString();
+                mp_plus_txbx.Text = dr["mp_plus"].ToString();
+                durability_txbx.Text = dr["durability"].ToString();
                 add_btn.IsEnabled = false;
                 update_btn.IsEnabled = true;
                 delete_btn.IsEnabled = true;
