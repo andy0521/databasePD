@@ -59,6 +59,7 @@ namespace WpfApp1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.updateDataGrid();
+
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -70,7 +71,10 @@ namespace WpfApp1
 
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into player_character(player_id,nickname,player_level,specialization_id,weapon_id,armor_id)" +
+            
+
+
+             String sql = "insert into player_character(player_id,nickname,player_level,specialization_id,weapon_id,armor_id)" +
                 "values(:player_id,:nickname,:player_level,:specialization_id,:weapon_id,:armor_id)";
             this.AUD(sql,0);
             add_btn.IsEnabled =  false;
@@ -118,20 +122,27 @@ namespace WpfApp1
         }
         private void AUD (String sql_stmt, int statue)
         {
+            
             String msg = "";
             OracleCommand cmd = con.CreateCommand();
             cmd.CommandText = sql_stmt;
             cmd.CommandType = CommandType.Text;
+          
             switch (statue)
             {
+
                 case 0:
+                   
+
                     msg = "Row Inserted Successfully!";
-                    cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
-                    cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = Nickname_txbx.Text;
-                    cmd.Parameters.Add("Player_Level", OracleDbType.Int32,2).Value = Int32.Parse(Player_Level_txbx.Text);
-                    cmd.Parameters.Add("Specialization_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
-                    cmd.Parameters.Add("Weapon_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapon_Id_txbx.Text);
-                    cmd.Parameters.Add("Armor_id", OracleDbType.Int32, 3).Value = Int32.Parse(Armor_Id_txbx.Text);
+                        cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
+                        cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = Nickname_txbx.Text;
+                        cmd.Parameters.Add("Player_Level", OracleDbType.Int32, 2).Value = Int32.Parse(Player_Level_txbx.Text);
+                        cmd.Parameters.Add("Specialization_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
+                        cmd.Parameters.Add("Weapon_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapon_Id_txbx.Text);
+                        cmd.Parameters.Add("Armor_id", OracleDbType.Int32, 3).Value = Int32.Parse(Armor_Id_txbx.Text);
+                    
+                 
 
                     break;
                 case 1:

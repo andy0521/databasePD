@@ -60,6 +60,7 @@ namespace WpfApp1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.updateDataGrid();
+         
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -68,7 +69,24 @@ namespace WpfApp1
         }
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into player_info(player_id,password,email,tel)" +
+
+            String sql = "select count(*) from player_info where player_id=:playerid";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("playerid", OracleDbType.NChar).Value = Player_Id_txbx.Text.ToString();
+         
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow>0)
+            {
+                String msg = "player_id已被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            sql = "insert into player_info(player_id,password,email,tel)" +
                 "values(:player_id,:password,:email,:tel)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;
@@ -232,6 +250,9 @@ namespace WpfApp1
             new Window6().ShowDialog();
         }
 
-
+        private void Player_Id_txbx_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+  
+        }
     }
 }

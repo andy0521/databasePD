@@ -208,10 +208,10 @@ namespace WpfApp1
 
         private void Player_Character_btn_Click(object sender, RoutedEventArgs e)
         {
-            
+            this.Hide();
             MainWindow mw = new MainWindow();
             mw.ShowDialog();
-            this.Hide();
+          
         }
         private void Specialization_btn_Click(object sender, RoutedEventArgs e)
         {
