@@ -95,19 +95,55 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "update weapon_type set weapon_type_name = :weapon_type_name " +
-                "where weapon_type_id = :weapon_type_id";
-            this.AUD(sql, 1);
+            String sql = "select count(*) from weapon_type where weapon_type_id=:weapon_type_id";
 
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("weapon_type_id", OracleDbType.NChar).Value = weapon_type_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此weapon_type_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "update weapon_type set weapon_type_name = :weapon_type_name " +
+                    "where weapon_type_id = :weapon_type_id";
+                this.AUD(sql, 1);
+            }
         }
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            
-            String sql = "delete from  weapon_type " +
-                "where weapon_type_id = :weapon_type_id";
-            this.AUD(sql, 2);
-            this.resetAll();
+            String sql = "select count(*) from weapon_type where weapon_type_id=:weapon_type_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("weapon_type_id", OracleDbType.NChar).Value = weapon_type_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此weapon_type_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "delete from  weapon_type " +
+               "where weapon_type_id = :weapon_type_id";
+                this.AUD(sql, 2);
+                this.resetAll();
+            }
         }
         private void resetAll()
         {

@@ -96,19 +96,56 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "update specialization set spec_name = :spec_name ," +
-                " hp_weighted= :hp_weighted , mp_weighted = :mp_weighted , " + " phy_damage_weighted = :phy_damage_weighted, magic_damage_weighted = :magic_damage_weighted, phy_defense_weighted = :phy_defense_weighted,magic_defense_weighted = :magic_defense_weighted,weapon_type_id = :weapon_type_id " +
-                " where spec_id = :spec_id " ;
-            this.AUD(sql, 1);
+            String sql = "select count(*) from specialization where spec_id=:spec_id";
 
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("spec_id", OracleDbType.NChar).Value = spec_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此specialization_Id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "update specialization set spec_name = :spec_name ," +
+                      " hp_weighted= :hp_weighted , mp_weighted = :mp_weighted , " + " phy_damage_weighted = :phy_damage_weighted, magic_damage_weighted = :magic_damage_weighted, phy_defense_weighted = :phy_defense_weighted,magic_defense_weighted = :magic_defense_weighted,weapon_type_id = :weapon_type_id " +
+                      " where spec_id = :spec_id ";
+                this.AUD(sql, 1);
+            }
         }
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "delete from  specialization " +
+            String sql = "select count(*) from specialization where spec_id=:spec_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("spec_id", OracleDbType.NChar).Value = spec_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此specialization_Id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+               sql = "delete from  specialization " +
                 "where spec_id = :spec_id";
-            this.AUD(sql, 2);
-            this.resetAll();
+                this.AUD(sql, 2);
+                this.resetAll();
+            }
         }
         private void resetAll()
         {

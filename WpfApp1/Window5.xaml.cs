@@ -103,23 +103,61 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
+            String sql = "select count(*) from armor where armor_id=:armor_id";
 
-            String sql = "update armor set armor_name = :armor_name ," +
-                " pd_weighted= :pd_weighted , md_weighted = :md_weighted , " +
-                "speed_weighted = :speed_weighted , dodge_weighted = :dodge_weighted, " +
-                  "hp_plus = :hp_plus , mp_plus = :mp_plus ," +"durability = :durability " +
-                "where armor_id = :armor_id";
-            this.AUD(sql, 1);
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("armor_id", OracleDbType.NChar).Value = armor_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此armor_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "update armor set armor_name = :armor_name ," +
+                     " pd_weighted= :pd_weighted , md_weighted = :md_weighted , " +
+                     "speed_weighted = :speed_weighted , dodge_weighted = :dodge_weighted, " +
+                       "hp_plus = :hp_plus , mp_plus = :mp_plus ," + "durability = :durability " +
+                     "where armor_id = :armor_id";
+                this.AUD(sql, 1);
+            }
 
         }
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "delete from  armor " +
-                "where armor_id = :armor_id";
-            this.AUD(sql, 2);
-            this.resetAll();
+            String sql = "select count(*) from armor where armor_id=:armor_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("armor_id", OracleDbType.NChar).Value = armor_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此armor_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "delete from  armor " +
+               "where armor_id = :armor_id";
+                this.AUD(sql, 2);
+                this.resetAll();
+            }
         }
+
         private void resetAll()
         {
             armor_id_txbx.Text = "";

@@ -95,19 +95,56 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "update weapon set weapon_type_id = :weapon_type_id ," +
-                " weapon_name= :weapon_name , atk = :atk  " +
-                "where weapon_id = :weapon_id";
-            this.AUD(sql, 1);
+            String sql = "select count(*) from weapon where weapon_id=:weapon_id";
 
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("weapon_id", OracleDbType.NChar).Value = weapon_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此weapon_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "update weapon set weapon_type_id = :weapon_type_id ," +
+                    " weapon_name= :weapon_name , atk = :atk  " +
+                    "where weapon_id = :weapon_id";
+                this.AUD(sql, 1);
+            }
         }
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "delete from  weapon " +
+            String sql = "select count(*) from weapon where weapon_id=:weapon_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("weapon_id", OracleDbType.NChar).Value = weapon_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此weapon_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "delete from  weapon " +
                 "where weapon_id = :weapon_id";
-            this.AUD(sql, 2);
-            this.resetAll();
+                this.AUD(sql, 2);
+                this.resetAll();
+            }
         }
         private void resetAll()
         {

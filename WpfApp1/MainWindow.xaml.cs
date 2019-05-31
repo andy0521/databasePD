@@ -101,21 +101,57 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
+            String sql = "select count(*) from player_character where player_id=:playerid";
 
-            String sql = "update player_character set nickname = :nickname ," +
-                " player_level= :player_level , specialization_id = :specialization_id , " +
-                "weapon_id = :weapon_id , armor_id = :armor_id  " +
-                "where player_id = :player_id";
-            this.AUD(sql,1);
+            OracleCommand cmd = new OracleCommand(sql, con);
 
+            cmd.Parameters.Add("playerid", OracleDbType.NChar).Value = Player_Id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此player_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "update player_character set nickname = :nickname ," +
+                   " player_level= :player_level , specialization_id = :specialization_id , " +
+                   "weapon_id = :weapon_id , armor_id = :armor_id  " +
+                   "where player_id = :player_id";
+                this.AUD(sql, 1);
+            }
         }
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql =  "delete from  player_character " +
-                "where player_id = :player_id";
-            this.AUD(sql,2);
-            this.resetAll();
+            String sql = "select count(*) from player_character where player_id=:playerid";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("playerid", OracleDbType.NChar).Value = Player_Id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此player_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "delete from  player_character " +
+               "where player_id = :player_id";
+                this.AUD(sql, 2);
+                this.resetAll();
+            }
         }
         private void resetAll()
         {

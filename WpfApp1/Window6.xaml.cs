@@ -103,21 +103,57 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
+            String sql = "select count(*) from player_level where player_level=:player_level";
 
-            String sql = "update player_level set hp_base = :hp_base ," +
-                " mp_base= :mp_base , pda_base = :pda_base , " +
-                "mda_base = :mda_base , pde_base = :pde_base, mde_base = :mde_base  " +
-                "where player_level = :player_level";
-            this.AUD(sql, 1);
+            OracleCommand cmd = new OracleCommand(sql, con);
 
+            cmd.Parameters.Add("player_level", OracleDbType.NChar).Value = player_level_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此armor_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "update player_level set hp_base = :hp_base ," +
+                    " mp_base= :mp_base , pda_base = :pda_base , " +
+                    "mda_base = :mda_base , pde_base = :pde_base, mde_base = :mde_base  " +
+                    "where player_level = :player_level";
+                this.AUD(sql, 1);
+
+            }
         }
-
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "delete from  player_level " +
+            String sql = "select count(*) from player_level where player_level=:player_level";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("player_level", OracleDbType.NChar).Value = player_level_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此armor_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "delete from  player_level " +
                 "where player_level = :player_level";
-            this.AUD(sql, 2);
-            this.resetAll();
+                this.AUD(sql, 2);
+                this.resetAll();
+            }
         }
         private void resetAll()
         {
