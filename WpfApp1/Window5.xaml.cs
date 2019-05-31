@@ -75,7 +75,23 @@ namespace WpfApp1
 
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into armor(armor_id,armor_name,pd_weighted,md_weighted,speed_weighted,dodge_weighted,hp_plus,mp_plus,durability)" +
+            String sql = "select count(*) from armor where armor_id=:armor_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("armor_id", OracleDbType.NChar).Value = armor_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow > 0)
+            {
+                String msg = "armor_id已被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+             sql = "insert into armor(armor_id,armor_name,pd_weighted,md_weighted,speed_weighted,dodge_weighted,hp_plus,mp_plus,durability)" +
                 "values(:armor_id,:armor_name,:pd_weighted,:md_weighted,:speed_weighted,:dodge_weighted,:hp_plus,:mp_plus,:durability)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;

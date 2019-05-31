@@ -67,7 +67,23 @@ namespace WpfApp1
         }
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into weapon_type(weapon_type_id,weapon_type_name)" +
+            String sql = "select count(*) from weapon_type where weapon_type_id=:weapon_type_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("weapon_type_id", OracleDbType.NChar).Value = weapon_type_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow > 0)
+            {
+                String msg = "weapon_type_id已被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            sql = "insert into weapon_type(weapon_type_id,weapon_type_name)" +
                 "values(:weapon_type_id,:weapon_type_name)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;

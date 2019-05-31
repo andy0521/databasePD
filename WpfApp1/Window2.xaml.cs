@@ -68,7 +68,23 @@ namespace WpfApp1
         }
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into specialization(spec_id,spec_name,hp_weighted,mp_weighted,phy_damage_weighted,magic_damage_weighted,phy_defense_weighted,magic_defense_weighted,weapon_type_id) "  +
+            String sql = "select count(*) from specialization where spec_id=:spec_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("spec_id", OracleDbType.NChar).Value = spec_id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow > 0)
+            {
+                String msg = "specialization_Id已被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+             sql = "insert into specialization(spec_id,spec_name,hp_weighted,mp_weighted,phy_damage_weighted,magic_damage_weighted,phy_defense_weighted,magic_defense_weighted,weapon_type_id) "  +
                 "values( :spec_id, :spec_name, :hp_weighted, :mp_weighted, :phy_damage_weighted, :magic_damage_weighted, :phy_defense_weighted, :magic_defense_weighted, :weapon_type_id)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;

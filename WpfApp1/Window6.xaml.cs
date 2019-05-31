@@ -75,7 +75,23 @@ namespace WpfApp1
 
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "insert into player_level(player_level,hp_base,mp_base,pda_base,mda_base,pde_base,mde_base)" +
+            String sql = "select count(*) from player_level where player_level=:player_level";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("player_level", OracleDbType.NChar).Value = player_level_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow > 0)
+            {
+                String msg = "armor_id已被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+             sql = "insert into player_level(player_level,hp_base,mp_base,pda_base,mda_base,pde_base,mde_base)" +
                 "values(:player_level,:hp_base,:mp_base,:pda_base,:mda_base,:pde_base,:mde_base)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;

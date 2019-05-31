@@ -71,10 +71,25 @@ namespace WpfApp1
 
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            String sql = "select count(*) from player_character where player_id=:playerid";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("playerid", OracleDbType.NChar).Value = Player_Id_txbx.Text.ToString();
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow > 0)
+            {
+                String msg = "player_id已被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
 
 
-             String sql = "insert into player_character(player_id,nickname,player_level,specialization_id,weapon_id,armor_id)" +
+                return;
+            }
+
+             sql = "insert into player_character(player_id,nickname,player_level,specialization_id,weapon_id,armor_id)" +
                 "values(:player_id,:nickname,:player_level,:specialization_id,:weapon_id,:armor_id)";
             this.AUD(sql,0);
             add_btn.IsEnabled =  false;
