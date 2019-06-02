@@ -287,5 +287,7 @@ namespace WpfApp1
             this.Hide();
             new Window6().ShowDialog();
         }
+
+        
     }
 }

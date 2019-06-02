@@ -23,10 +23,90 @@
         <Label Content="weapon_type_id" HorizontalAlignment="Left" Margin="25.333,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.491,-2.648" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
         <Label Content="weapon_name" HorizontalAlignment="Left" Margin="25.333,192,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Label Content="atk" HorizontalAlignment="Left" Margin="25.333,222,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
-        <TextBox x:Name="weapon_id_txbx" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="103,133,0,0" Grid.Column="2" Grid.RowSpan="2"/>
-        <TextBox x:Name="weapon_type_id_txbx" HorizontalAlignment="Left" Height="23" Margin="103,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2"/>
-        <TextBox x:Name="weapon_name_txbx" HorizontalAlignment="Left" Height="23" Margin="103,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2"/>
-        <TextBox x:Name="atk_txbx" HorizontalAlignment="Left" Height="23" Margin="103,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.392,-0.826"/>
+        <TextBox x:Name="weapon_id_txbx" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="103,133,0,0" Grid.Column="2" Grid.RowSpan="2">
+            <TextBox.Resources>
+                <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                    <VisualBrush.Visual>
+                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </TextBox.Resources>
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="weapon_type_id_txbx" HorizontalAlignment="Left" Height="23" Margin="103,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2">
+            <TextBox.Resources>
+                <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                    <VisualBrush.Visual>
+                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </TextBox.Resources>
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="weapon_name_txbx" HorizontalAlignment="Left" Height="23" Margin="103,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2">
+            <TextBox.Resources>
+                <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                    <VisualBrush.Visual>
+                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </TextBox.Resources>
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="atk_txbx" HorizontalAlignment="Left" Height="23" Margin="103,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.392,-0.826">
+            <TextBox.Resources>
+                <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                    <VisualBrush.Visual>
+                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </TextBox.Resources>
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
         <Button x:Name="add_btn" Content="Add" HorizontalAlignment="Left" Margin="25.333,345,0,0" VerticalAlignment="Top" Width="75" Click="Add_btn_Click" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
         <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="83,341,0,0" VerticalAlignment="Top" Width="75" Click="Update_btn_Click" IsEnabled="False" Grid.Column="2" Grid.RowSpan="2"/>
         <Button x:Name="delete_btn" Content="Delete" HorizontalAlignment="Left" Margin="177,336,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="1.095,0.429" Click="Delete_btn_Click" IsEnabled="False" Grid.Column="2" Grid.RowSpan="2"/>

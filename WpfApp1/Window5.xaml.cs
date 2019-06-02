@@ -191,10 +191,10 @@ namespace WpfApp1
                     msg = "Row Inserted Successfully!";
                     cmd.Parameters.Add("armor_id", OracleDbType.Varchar2, 16).Value = armor_id_txbx.Text;
                     cmd.Parameters.Add("armor_name", OracleDbType.Varchar2, 20).Value = armor_name_txbx.Text;
-                    cmd.Parameters.Add("pd_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(pd_weighted_txbx.Text);
-                    cmd.Parameters.Add("md_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(md_weighted_txbx.Text);
-                    cmd.Parameters.Add("speed_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(speed_weighted_txbx.Text);
-                    cmd.Parameters.Add("dodge_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(dodge_weighted_txbx.Text);
+                    cmd.Parameters.Add("pd_weighted", OracleDbType.Varchar2, 5).Value = pd_weighted_txbx.Text;
+                    cmd.Parameters.Add("md_weighted", OracleDbType.Varchar2, 5).Value = md_weighted_txbx.Text;
+                    cmd.Parameters.Add("speed_weighted", OracleDbType.Varchar2, 5).Value = speed_weighted_txbx.Text;
+                    cmd.Parameters.Add("dodge_weighted", OracleDbType.Varchar2, 5).Value = dodge_weighted_txbx.Text;
                     cmd.Parameters.Add("hp_plus", OracleDbType.Int32, 5).Value = Int32.Parse(hp_plus_txbx.Text);
                     cmd.Parameters.Add("mp_plus", OracleDbType.Int32, 5).Value = Int32.Parse(mp_plus_txbx.Text);
                     cmd.Parameters.Add("durability", OracleDbType.Int32, 3).Value = Int32.Parse(durability_txbx.Text);
@@ -202,10 +202,10 @@ namespace WpfApp1
                 case 1:
                     msg = "Row Update Successfully!";
                     cmd.Parameters.Add("armor_name", OracleDbType.Varchar2, 20).Value = armor_name_txbx.Text;
-                    cmd.Parameters.Add("pd_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(pd_weighted_txbx.Text);
-                    cmd.Parameters.Add("md_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(md_weighted_txbx.Text);
-                    cmd.Parameters.Add("speed_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(speed_weighted_txbx.Text);
-                    cmd.Parameters.Add("dodge_weighted", OracleDbType.Int32, 3).Value = Int32.Parse(dodge_weighted_txbx.Text);
+                    cmd.Parameters.Add("pd_weighted", OracleDbType.Varchar2, 5).Value = pd_weighted_txbx.Text;
+                    cmd.Parameters.Add("md_weighted", OracleDbType.Varchar2, 5).Value = md_weighted_txbx.Text;
+                    cmd.Parameters.Add("speed_weighted", OracleDbType.Varchar2, 5).Value = speed_weighted_txbx.Text;
+                    cmd.Parameters.Add("dodge_weighted", OracleDbType.Varchar2, 5).Value = dodge_weighted_txbx.Text;
                     cmd.Parameters.Add("hp_plus", OracleDbType.Int32, 5).Value = Int32.Parse(hp_plus_txbx.Text);
                     cmd.Parameters.Add("mp_plus", OracleDbType.Int32, 5).Value = Int32.Parse(mp_plus_txbx.Text);
                     cmd.Parameters.Add("durability", OracleDbType.Int32, 3).Value = Int32.Parse(durability_txbx.Text);
