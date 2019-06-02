@@ -15,6 +15,9 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
 using System.Data;
+using System.Drawing.Printing;
+using System.Windows.Xps.Packaging;
+using System.IO;
 
 namespace WpfApp1
 {
@@ -29,7 +32,7 @@ namespace WpfApp1
             this.setConnection();
             InitializeComponent();
             this.updateDataGrid();
-            specialization_btn.IsEnabled =false;
+            specialization_btn.IsEnabled = false;
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -84,8 +87,8 @@ namespace WpfApp1
 
                 return;
             }
-             sql = "insert into specialization(spec_id,spec_name,hp_weighted,mp_weighted,phy_damage_weighted,magic_damage_weighted,phy_defense_weighted,magic_defense_weighted,weapon_type_id) "  +
-                "values( :spec_id, :spec_name, :hp_weighted, :mp_weighted, :phy_damage_weighted, :magic_damage_weighted, :phy_defense_weighted, :magic_defense_weighted, :weapon_type_id)";
+            sql = "insert into specialization(spec_id,spec_name,hp_weighted,mp_weighted,phy_damage_weighted,magic_damage_weighted,phy_defense_weighted,magic_defense_weighted,weapon_type_id) " +
+               "values( :spec_id, :spec_name, :hp_weighted, :mp_weighted, :phy_damage_weighted, :magic_damage_weighted, :phy_defense_weighted, :magic_defense_weighted, :weapon_type_id)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;
             update_btn.IsEnabled = true;
@@ -141,8 +144,8 @@ namespace WpfApp1
             }
             else
             {
-               sql = "delete from  specialization " +
-                "where spec_id = :spec_id";
+                sql = "delete from  specialization " +
+                 "where spec_id = :spec_id";
                 this.AUD(sql, 2);
                 this.resetAll();
             }
@@ -157,8 +160,8 @@ namespace WpfApp1
             magic_damage_txbx.Text = "";
             phy_defense_txbx.Text = "";
             magic_defense_txbx.Text = "";
-            weapon_type_txbx.Text = "";
-          
+            weapon_class_txbx.Text = "";
+
 
 
             add_btn.IsEnabled = true;
@@ -182,13 +185,13 @@ namespace WpfApp1
                     msg = "Row Inserted Successfully!";
                     cmd.Parameters.Add("spec_id", OracleDbType.Int32, 2).Value = Int32.Parse(spec_id_txbx.Text);
                     cmd.Parameters.Add("spec_name", OracleDbType.Varchar2, 16).Value = spec_name_txbx.Text;
-                    cmd.Parameters.Add("hp_weighted", OracleDbType.Varchar2, 50).Value =hp_weight_txbx.Text;
+                    cmd.Parameters.Add("hp_weighted", OracleDbType.Varchar2, 50).Value = hp_weight_txbx.Text;
                     cmd.Parameters.Add("mp_weighted", OracleDbType.Varchar2, 20).Value = mp_weight_txbx.Text;
                     cmd.Parameters.Add("phy_damage_weighted", OracleDbType.Varchar2, 20).Value = phy_damage_txbx.Text;
                     cmd.Parameters.Add("magic_damage_weighted", OracleDbType.Varchar2, 20).Value = magic_damage_txbx.Text;
                     cmd.Parameters.Add("phy_defense_weighted", OracleDbType.Varchar2, 20).Value = phy_defense_txbx.Text;
                     cmd.Parameters.Add("magic_defense_weighted", OracleDbType.Varchar2, 20).Value = magic_defense_txbx.Text;
-                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_txbx.Text);
+                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_class_txbx.Text);
 
 
                     break;
@@ -201,7 +204,7 @@ namespace WpfApp1
                     cmd.Parameters.Add("magic_damage_weighted", OracleDbType.Varchar2, 20).Value = magic_damage_txbx.Text;
                     cmd.Parameters.Add("phy_defense_weighted", OracleDbType.Varchar2, 20).Value = phy_defense_txbx.Text;
                     cmd.Parameters.Add("magic_defense_weighted", OracleDbType.Varchar2, 20).Value = magic_defense_txbx.Text;
-                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_txbx.Text);
+                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_class_txbx.Text);
 
                     cmd.Parameters.Add("spec_id", OracleDbType.Int32, 2).Value = Int32.Parse(spec_id_txbx.Text);
 
@@ -246,7 +249,7 @@ namespace WpfApp1
                 magic_damage_txbx.Text = dr["magic_damage_weighted"].ToString();
                 phy_defense_txbx.Text = dr["phy_defense_weighted"].ToString();
                 magic_defense_txbx.Text = dr["magic_defense_weighted"].ToString();
-                weapon_type_txbx.Text = dr["weapon_type_id"].ToString();
+                weapon_class_txbx.Text = dr["weapon_class_id"].ToString();
 
                 add_btn.IsEnabled = false;
                 update_btn.IsEnabled = true;
@@ -264,7 +267,7 @@ namespace WpfApp1
             this.Hide();
             MainWindow mw = new MainWindow();
             mw.ShowDialog();
-          
+
         }
         private void Specialization_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -295,5 +298,27 @@ namespace WpfApp1
             this.Hide();
             new Window6().ShowDialog();
         }
+        private void Weapon_class_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window7().ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+                System.Windows.Controls.PrintDialog Printdlg = new System.Windows.Controls.PrintDialog();
+                if ((bool)Printdlg.ShowDialog().GetValueOrDefault())
+                {
+                    Size pageSize = new Size(Printdlg.PrintableAreaWidth, Printdlg.PrintableAreaHeight);
+                    // sizing of the element.
+                    myDataGrid.Measure(pageSize);
+                    myDataGrid.Arrange(new Rect(10, 10, pageSize.Width, pageSize.Height));
+                    Printdlg.PrintVisual(myDataGrid, Title);
+                }
+            
+
+        }
+        
     }
 }

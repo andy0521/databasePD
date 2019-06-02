@@ -15,7 +15,7 @@ using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
 using System.Data;
-
+using System.Drawing.Printing;
 namespace WpfApp1
 {
     /// <summary>
@@ -290,9 +290,11 @@ namespace WpfApp1
             new Window6().ShowDialog();
         }
 
-        private void Player_Id_txbx_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+
+        private void Weapon_class_btn_Click(object sender, RoutedEventArgs e)
         {
-  
+            this.Hide();
+            new Window7().ShowDialog();
         }
     }
 }

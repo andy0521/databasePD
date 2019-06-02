@@ -31,7 +31,7 @@
         <Label Content="magic_damaged_weight" HorizontalAlignment="Left" Margin="25.333,282,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1" Height="30" RenderTransformOrigin="0.336,0.8"/>
         <Label Content="phy_defense_weight" HorizontalAlignment="Left" Margin="25.333,317,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
         <Label Content="magic_defense_weight" HorizontalAlignment="Left" Margin="25.333,346,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
-        <Label Content="weapon_type_id" HorizontalAlignment="Left" Margin="25.333,372,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
+        <Label Content="weapon_class_id" HorizontalAlignment="Left" Margin="25.333,372,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1"/>
       
         <Button x:Name="add_btn" Content="Add" HorizontalAlignment="Left" Margin="25.333,416,0,0" VerticalAlignment="Top" Width="75" Click="Add_btn_Click" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1" RenderTransformOrigin="0.578,2.054"/>
         <Button x:Name="update_btn" Content="Update" HorizontalAlignment="Left" Margin="83,416,0,0" VerticalAlignment="Top" Width="75" Click="Update_btn_Click" IsEnabled="False" Grid.Column="2" Grid.RowSpan="2"/>
@@ -40,15 +40,16 @@
         <Button x:Name ="Player_Character_btn" Content="Player_Character" HorizontalAlignment="Left" Margin="17,37,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="104" RenderTransformOrigin="-0.201,0.474" Grid.ColumnSpan="3" Click="Player_Character_btn_Click"/>
         <Button x:Name ="Player_info_btn" Content="player_info" Grid.Column="2" Margin="64,37,675.667,0" Grid.RowSpan="2" VerticalAlignment="Top" RenderTransformOrigin="0.07,0.893" Click="Player_info_btn_Click"/>
         <Button x:Name ="specialization_btn" Content="specialization " Grid.Column="2" HorizontalAlignment="Left" Margin="148,37,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="85" Click="Specialization_btn_Click" IsEnabled="False"/>
-        <Button x:Name ="weapon_type_btn" Content="weapon_type" Grid.Column="2" HorizontalAlignment="Left" Margin="238,37,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Weapon_type_btn_Click"/>
+        <Button x:Name ="weapon_type_btn" Content="weapon_type" Grid.Column="2" HorizontalAlignment="Left" Margin="238,37,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="80" Click="Weapon_type_btn_Click"/>
         <Button x:Name ="weapon_btn" Content="weapon " Grid.Column="1" HorizontalAlignment="Left" Margin="17.333,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Click="Weapon_btn_Click"/>
         <Button x:Name ="armor_btn" Content="armor" Grid.Column="2" HorizontalAlignment="Left" Margin="64,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Armor_btn_Click"/>
         <Button x:Name="player_level_btn" Content="player_Level" Grid.Column="2" HorizontalAlignment="Left" Margin="148,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Player_level_btn_Click"/>
-        <TextBox x:Name="spec_id_txbx" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="136,134,0,0" Grid.Column="2" Grid.RowSpan="2">
+        <Button x:Name="weapon_class_btn" Content="weapon_Class" Grid.Column="2" HorizontalAlignment="Left" Margin="229,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="80" Click="Weapon_class_btn_Click"/>
+        <TextBox x:Name="spec_id_txbx" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="136,134,0,0" Grid.Column="2" Grid.RowSpan="2" MaxLength="16">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入職業ID"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -65,11 +66,11 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="spec_name_txbx" HorizontalAlignment="Left" Height="23" Margin="136,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2">
+        <TextBox x:Name="spec_name_txbx" HorizontalAlignment="Left" Height="23" Margin="136,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" MaxLength="10">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入職業名稱"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -86,11 +87,11 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="hp_weight_txbx" HorizontalAlignment="Left" Height="23" Margin="136,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2">
+        <TextBox x:Name="hp_weight_txbx" HorizontalAlignment="Left" Height="23" Margin="136,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入HP加權"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -107,11 +108,11 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="mp_weight_txbx" HorizontalAlignment="Left" Height="23" Margin="136,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.392,-0.826">
+        <TextBox x:Name="mp_weight_txbx" HorizontalAlignment="Left" Height="23" Margin="136,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.392,-0.826" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入MP加權"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -128,11 +129,11 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="phy_damage_txbx" HorizontalAlignment="Left" Height="23" Margin="137,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.208,-0.232" Grid.Column="2" Grid.RowSpan="2">
+        <TextBox x:Name="phy_damage_txbx" HorizontalAlignment="Left" Height="23" Margin="137,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.208,-0.232" Grid.Column="2" Grid.RowSpan="2" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入物攻加權"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -149,11 +150,11 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="magic_damage_txbx" HorizontalAlignment="Left" Height="23" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="136,288,0,0">
+        <TextBox x:Name="magic_damage_txbx" HorizontalAlignment="Left" Height="23" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="136,288,0,0" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入魔攻加權"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -170,11 +171,11 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="phy_defense_txbx" HorizontalAlignment="Left" Height="23" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="134,316,0,0">
+        <TextBox x:Name="phy_defense_txbx" HorizontalAlignment="Left" Height="23" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="134,316,0,0" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入物防加權"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -191,11 +192,11 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="magic_defense_txbx" HorizontalAlignment="Left" Height="23" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="134,346,0,0">
+        <TextBox x:Name="magic_defense_txbx" HorizontalAlignment="Left" Height="23" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="134,346,0,0" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入魔防加權"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -212,11 +213,11 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="weapon_type_txbx" HorizontalAlignment="Left" Height="23" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="134,374,0,0">
+        <TextBox x:Name="weapon_class_txbx" HorizontalAlignment="Left" Height="23" Grid.RowSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="134,374,0,0" MaxLength="4">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="提示文字"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入武器分類的Id"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>
@@ -233,6 +234,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
+        <Button Content="print" Grid.Column="2" HorizontalAlignment="Left" Margin="179,456,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
 
     </Grid>

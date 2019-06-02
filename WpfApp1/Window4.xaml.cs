@@ -28,7 +28,7 @@ namespace WpfApp1
             this.setConnection();
             InitializeComponent();
             this.updateDataGrid();
-            weapen_btn.IsEnabled = false;
+            weapon_btn.IsEnabled = false;
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -272,6 +272,11 @@ namespace WpfApp1
         {
             this.Hide();
             new Window6().ShowDialog();
+        }
+        private void Weapon_class_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window7().ShowDialog();
         }
     }
 }

@@ -89,8 +89,8 @@ namespace WpfApp1
                 return;
             }
 
-             sql = "insert into player_character(player_id,nickname,player_level,specialization_id,weapon_id,armor_id)" +
-                "values(:player_id,:nickname,:player_level,:specialization_id,:weapon_id,:armor_id)";
+             sql = "insert into player_character(player_id,nickname,player_level,spec_id,weapon_id,armor_id)" +
+                "values(:player_id,:nickname,:player_level,:spec_id,:weapon_id,:armor_id)";
             this.AUD(sql,0);
             add_btn.IsEnabled =  false;
             update_btn.IsEnabled = true;
@@ -120,7 +120,7 @@ namespace WpfApp1
             else
             {
                 sql = "update player_character set nickname = :nickname ," +
-                   " player_level= :player_level , specialization_id = :specialization_id , " +
+                   " player_level= :player_level , spec_id = :spec_id , " +
                    "weapon_id = :weapon_id , armor_id = :armor_id  " +
                    "where player_id = :player_id";
                 this.AUD(sql, 1);
@@ -189,7 +189,7 @@ namespace WpfApp1
                         cmd.Parameters.Add("Player_Id", OracleDbType.Varchar2, 16).Value = Player_Id_txbx.Text;
                         cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = Nickname_txbx.Text;
                         cmd.Parameters.Add("Player_Level", OracleDbType.Int32, 2).Value = Int32.Parse(Player_Level_txbx.Text);
-                        cmd.Parameters.Add("Specialization_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
+                        cmd.Parameters.Add("Spec_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
                         cmd.Parameters.Add("Weapon_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapon_Id_txbx.Text);
                         cmd.Parameters.Add("Armor_id", OracleDbType.Int32, 3).Value = Int32.Parse(Armor_Id_txbx.Text);
                     
@@ -200,7 +200,7 @@ namespace WpfApp1
                     msg = "Row Update Successfully!";
                     cmd.Parameters.Add("Nickname", OracleDbType.Varchar2, 12).Value = Nickname_txbx.Text;
                     cmd.Parameters.Add("Player_Level", OracleDbType.Int32, 2).Value = Int32.Parse(Player_Level_txbx.Text);
-                    cmd.Parameters.Add("Specialization_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
+                    cmd.Parameters.Add("Spec_id", OracleDbType.Int32, 2).Value = Int32.Parse(Specialization_Id_txbx.Text);
                     cmd.Parameters.Add("Weapon_Id", OracleDbType.Int32, 3).Value = Int32.Parse(Weapon_Id_txbx.Text);
                     cmd.Parameters.Add("Armor_id", OracleDbType.Int32, 3).Value = Int32.Parse(Armor_Id_txbx.Text);
 
@@ -243,7 +243,7 @@ namespace WpfApp1
                 Player_Id_txbx.Text = dr["player_id"].ToString();
                 Nickname_txbx.Text = dr["nickname"].ToString();
                 Player_Level_txbx.Text = dr["Player_Level"].ToString();
-                Specialization_Id_txbx.Text = dr["Specialization_Id"].ToString();
+                Specialization_Id_txbx.Text = dr["spec_id"].ToString();
                 Weapon_Id_txbx.Text = dr["Weapon_Id"].ToString();
                 Armor_Id_txbx.Text = dr["Armor_Id"].ToString();
                 add_btn.IsEnabled = false;
@@ -288,6 +288,10 @@ namespace WpfApp1
             new Window6().ShowDialog();
         }
 
-        
+        private void Weapon_class_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window7().ShowDialog();
+        }
     }
 }

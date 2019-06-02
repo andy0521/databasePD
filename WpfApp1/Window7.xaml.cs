@@ -18,17 +18,17 @@ using System.Data;
 namespace WpfApp1
 {
     /// <summary>
-    /// Window3.xaml 的互動邏輯
+    /// Window7.xaml 的互動邏輯
     /// </summary>
-    public partial class Window3 : Window
+    public partial class Window7 : Window
     {
         OracleConnection con = null;
-        public Window3()
+        public Window7()
         {
             this.setConnection();
             InitializeComponent();
             this.updateDataGrid();
-            weapon_type_btn.IsEnabled = false;
+    
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -38,7 +38,7 @@ namespace WpfApp1
         private void updateDataGrid()
         {
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select*from weapon_type";
+            cmd.CommandText = "select*from weapon_class order by weapon_class_id";
             cmd.CommandType = CommandType.Text;
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
@@ -67,24 +67,24 @@ namespace WpfApp1
         }
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "select count(*) from weapon_type where weapon_type_id=:weapon_type_id";
+            String sql = "select count(*) from weapon_class where weapon_class_id=:weapon_class_id";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
-            cmd.Parameters.Add("weapon_type_id", OracleDbType.NChar).Value = weapon_type_id_txbx.Text.ToString();
+            cmd.Parameters.Add("weapon_class_id", OracleDbType.NChar).Value = weapon_class_id_txbx.Text.ToString();
 
             int datarow = Convert.ToInt32(cmd.ExecuteScalar());
             if (datarow > 0)
             {
-                String msg = "weapon_type_id已被使用";
+                String msg = "weapon_class_id已被使用";
                 MessageBox.Show(msg);
                 cmd.Cancel();
 
 
                 return;
             }
-            sql = "insert into weapon_type(weapon_type_id, weapon_class_id ,weapon_type_name)" +
-                "values(:weapon_type_id,:weapon_class_id,:weapon_type_name)";
+            sql = "insert into weapon_class(weapon_class_id,class_name)" +
+                "values(:weapon_class_id,:class_name)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;
             update_btn.IsEnabled = true;
@@ -95,16 +95,16 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "select count(*) from weapon_type where weapon_type_id=:weapon_type_id";
+            String sql = "select count(*) from weapon_class where weapon_class_id=:weapon_class_id";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
-            cmd.Parameters.Add("weapon_type_id", OracleDbType.NChar).Value = weapon_type_id_txbx.Text.ToString();
+            cmd.Parameters.Add("weapon_class_id", OracleDbType.NChar).Value = weapon_class_id_txbx.Text.ToString();
 
             int datarow = Convert.ToInt32(cmd.ExecuteScalar());
             if (datarow == 0)
             {
-                String msg = "此weapon_type_id未被使用";
+                String msg = "此weapon_class_id未被使用";
                 MessageBox.Show(msg);
                 cmd.Cancel();
 
@@ -113,24 +113,24 @@ namespace WpfApp1
             }
             else
             {
-                sql = "update weapon_type set  weapon_class_id = : weapon_class_id ,weapon_type_name = :weapon_type_name " +
-                    "where weapon_type_id = :weapon_type_id";
+                sql = "update weapon_class set class_name = :class_name " +
+                    "where weapon_class_id = :weapon_class_id";
                 this.AUD(sql, 1);
             }
         }
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "select count(*) from weapon_type where weapon_type_id=:weapon_type_id";
+            String sql = "select count(*) from weapon_class where weapon_class_id=:weapon_class_id";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
-            cmd.Parameters.Add("weapon_type_id", OracleDbType.NChar).Value = weapon_type_id_txbx.Text.ToString();
+            cmd.Parameters.Add("weapon_class_id", OracleDbType.NChar).Value = weapon_class_id_txbx.Text.ToString();
 
             int datarow = Convert.ToInt32(cmd.ExecuteScalar());
             if (datarow == 0)
             {
-                String msg = "此weapon_type_id未被使用";
+                String msg = "此weapon_class_id未被使用";
                 MessageBox.Show(msg);
                 cmd.Cancel();
 
@@ -139,17 +139,17 @@ namespace WpfApp1
             }
             else
             {
-                sql = "delete from  weapon_type " +
-               "where weapon_type_id = :weapon_type_id";
+                sql = "delete from  weapon_class " +
+               "where weapon_class_id = :weapon_class_id";
                 this.AUD(sql, 2);
                 this.resetAll();
             }
         }
         private void resetAll()
         {
-            weapon_type_id_txbx.Text = "";
-            weapon_type_name_txbx.Text = "";
-     
+            weapon_class_id_txbx.Text = "";
+            weapon_class_name_txbx.Text = "";
+
 
             add_btn.IsEnabled = true;
             update_btn.IsEnabled = false;
@@ -170,24 +170,22 @@ namespace WpfApp1
             {
                 case 0:
                     msg = "Row Inserted Successfully!";
-                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_id_txbx.Text);
-                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 3).Value = Int32.Parse(weapon_type_id_txbx.Text);
-                    cmd.Parameters.Add("weapon_type_name", OracleDbType.Varchar2, 20).Value = weapon_type_name_txbx.Text;
-                
+                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 4).Value = weapon_class_id_txbx.Text;
+                    cmd.Parameters.Add("class_name", OracleDbType.Varchar2, 20).Value = weapon_class_name_txbx.Text;
+
 
                     break;
                 case 1:
                     msg = "Row Update Successfully!";
-                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 3).Value = Int32.Parse(weapon_type_id_txbx.Text);
-                    cmd.Parameters.Add("weapon_type_name", OracleDbType.Varchar2, 20).Value = weapon_type_name_txbx.Text;
-                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_id_txbx.Text);
+                    cmd.Parameters.Add("class_name", OracleDbType.Varchar2, 20).Value = weapon_class_name_txbx.Text;
+                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_class_id_txbx.Text);
 
 
                     break;
                 case 2:
                     msg = "Row Delete Successfully!";
 
-                    cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_id_txbx.Text);
+                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_class_id_txbx.Text);
 
                     break;
 
@@ -215,10 +213,9 @@ namespace WpfApp1
             DataRowView dr = dg.SelectedItem as DataRowView;
             if (dr != null)
             {
-                weapon_type_id_txbx.Text = dr["weapon_type_id"].ToString();
                 weapon_class_id_txbx.Text = dr["weapon_class_id"].ToString();
-                weapon_type_name_txbx.Text = dr["weapon_type_name"].ToString();
-            
+                weapon_class_name_txbx.Text = dr["class_name"].ToString();
+
                 add_btn.IsEnabled = false;
                 update_btn.IsEnabled = true;
                 delete_btn.IsEnabled = true;
@@ -266,6 +263,8 @@ namespace WpfApp1
             this.Hide();
             new Window6().ShowDialog();
         }
+
+   
         private void Weapon_class_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();

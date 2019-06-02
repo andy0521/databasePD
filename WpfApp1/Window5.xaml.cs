@@ -305,5 +305,10 @@ namespace WpfApp1
             MainWindow mw = new MainWindow();
             mw.ShowDialog();
         }
+        private void Weapon_class_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window7().ShowDialog();
+        }
     }
 }
