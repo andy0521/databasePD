@@ -39,7 +39,7 @@ namespace WpfApp1
         {
             OracleCommand cmd = con.CreateCommand();
 
-            cmd.CommandText = "select*from armor";
+            cmd.CommandText = "select*from armor order by armor_id";
             cmd.CommandType = CommandType.Text;
 
 
@@ -309,6 +309,14 @@ namespace WpfApp1
         {
             this.Hide();
             new Window7().ShowDialog();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window8().ShowDialog();
+
+
+
         }
     }
 }

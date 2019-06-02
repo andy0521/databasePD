@@ -27,6 +27,7 @@ namespace WpfApp1
         OracleConnection con = null;
         public MainWindow()
         {
+
             this.setConnection();
             InitializeComponent();
             Player_Character_btn.IsEnabled = false;
@@ -35,7 +36,7 @@ namespace WpfApp1
         {
             OracleCommand cmd = con.CreateCommand();
      
-            cmd.CommandText = "select*from player_character";
+            cmd.CommandText = "select*from player_character order by player_id";
             cmd.CommandType = CommandType.Text;
             
           
@@ -292,6 +293,14 @@ namespace WpfApp1
         {
             this.Hide();
             new Window7().ShowDialog();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window8().ShowDialog();
+
+
+
         }
     }
 }

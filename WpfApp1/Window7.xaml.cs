@@ -37,9 +37,10 @@ namespace WpfApp1
         }
         private void updateDataGrid()
         {
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select*from weapon_class order by weapon_class_id";
-            cmd.CommandType = CommandType.Text;
+        
+            String sql = "select*from weapon_class order by weapon_class_id ";
+            OracleCommand cmd = new OracleCommand(sql, con);
+         
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
@@ -269,6 +270,14 @@ namespace WpfApp1
         {
             this.Hide();
             new Window7().ShowDialog();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window8().ShowDialog();
+
+
+
         }
     }
 }

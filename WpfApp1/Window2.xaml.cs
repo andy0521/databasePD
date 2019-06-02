@@ -42,7 +42,7 @@ namespace WpfApp1
         private void updateDataGrid()
         {
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select*from specialization";
+            cmd.CommandText = "select*from specialization order by spec_id";
             cmd.CommandType = CommandType.Text;
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
@@ -87,8 +87,8 @@ namespace WpfApp1
 
                 return;
             }
-            sql = "insert into specialization(spec_id,spec_name,hp_weighted,mp_weighted,phy_damage_weighted,magic_damage_weighted,phy_defense_weighted,magic_defense_weighted,weapon_type_id) " +
-               "values( :spec_id, :spec_name, :hp_weighted, :mp_weighted, :phy_damage_weighted, :magic_damage_weighted, :phy_defense_weighted, :magic_defense_weighted, :weapon_type_id)";
+            sql = "insert into specialization(spec_id,spec_name,hp_weighted,mp_weighted,phy_damage_weighted,magic_damage_weighted,phy_defense_weighted,magic_defense_weighted,weapon_class_id) " +
+               "values( :spec_id, :spec_name, :hp_weighted, :mp_weighted, :phy_damage_weighted, :magic_damage_weighted, :phy_defense_weighted, :magic_defense_weighted, :weapon_class_id)";
             this.AUD(sql, 0);
             add_btn.IsEnabled = false;
             update_btn.IsEnabled = true;
@@ -118,7 +118,7 @@ namespace WpfApp1
             else
             {
                 sql = "update specialization set spec_name = :spec_name ," +
-                      " hp_weighted= :hp_weighted , mp_weighted = :mp_weighted , " + " phy_damage_weighted = :phy_damage_weighted, magic_damage_weighted = :magic_damage_weighted, phy_defense_weighted = :phy_defense_weighted,magic_defense_weighted = :magic_defense_weighted,weapon_type_id = :weapon_type_id " +
+                      " hp_weighted= :hp_weighted , mp_weighted = :mp_weighted , " + " phy_damage_weighted = :phy_damage_weighted, magic_damage_weighted = :magic_damage_weighted, phy_defense_weighted = :phy_defense_weighted,magic_defense_weighted = :magic_defense_weighted,weapon_class_id = :weapon_class_id " +
                       " where spec_id = :spec_id ";
                 this.AUD(sql, 1);
             }
@@ -306,16 +306,9 @@ namespace WpfApp1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
-                System.Windows.Controls.PrintDialog Printdlg = new System.Windows.Controls.PrintDialog();
-                if ((bool)Printdlg.ShowDialog().GetValueOrDefault())
-                {
-                    Size pageSize = new Size(Printdlg.PrintableAreaWidth, Printdlg.PrintableAreaHeight);
-                    // sizing of the element.
-                    myDataGrid.Measure(pageSize);
-                    myDataGrid.Arrange(new Rect(10, 10, pageSize.Width, pageSize.Height));
-                    Printdlg.PrintVisual(myDataGrid, Title);
-                }
+            this.Hide();
+            new Window8().ShowDialog();
+                
             
 
         }

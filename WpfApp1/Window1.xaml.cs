@@ -39,7 +39,7 @@ namespace WpfApp1
         private void updateDataGrid()
         {
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from player_info";
+            cmd.CommandText = "select * from player_info order by player_id";
             cmd.CommandType = CommandType.Text;
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
@@ -77,7 +77,7 @@ namespace WpfApp1
             cmd.Parameters.Add("playerid", OracleDbType.NChar).Value = Player_Id_txbx.Text.ToString();
          
             int datarow = Convert.ToInt32(cmd.ExecuteScalar());
-            if (datarow>0)
+            if (datarow > 0)
             {
                 String msg = "player_id已被使用";
                 MessageBox.Show(msg);
@@ -86,19 +86,21 @@ namespace WpfApp1
 
                 return;
             }
-            sql = "insert into player_info(player_id,password,email,tel)" +
-                "values(:player_id,:password,:email,:tel)";
-            this.AUD(sql, 0);
-            add_btn.IsEnabled = false;
-            update_btn.IsEnabled = true;
-            delete_btn.IsEnabled = true;
-
+            else
+            {
+                sql = "insert into player_info(player_id,password,email,tel)" +
+                    "values(:player_id,:password,:email,:tel)";
+                this.AUD(sql, 0);
+                add_btn.IsEnabled = false;
+                update_btn.IsEnabled = true;
+                delete_btn.IsEnabled = true;
+            }
 
         }
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "select count(*) from player_character where player_id=:playerid";
+            String sql = "select count(*) from player_info where player_id=:playerid";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
@@ -116,9 +118,8 @@ namespace WpfApp1
             }
             else
             {
-                sql = "update player_character set nickname = :nickname ," +
-                   " player_level= :player_level , specialization_id = :specialization_id , " +
-                   "weapon_id = :weapon_id , armor_id = :armor_id  " +
+                sql = "update player_info set password = :password ," +
+                   " email= :email , tel = :tel  " +
                    "where player_id = :player_id";
                 this.AUD(sql, 1);
             }
@@ -128,7 +129,7 @@ namespace WpfApp1
 
         private void Delete_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "select count(*) from player_character where player_id=:playerid";
+            String sql = "select count(*) from player_info  where player_id=:playerid";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
@@ -295,6 +296,14 @@ namespace WpfApp1
         {
             this.Hide();
             new Window7().ShowDialog();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new Window8().ShowDialog();
+
+
+
         }
     }
 }
