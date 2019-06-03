@@ -9,26 +9,26 @@
         Title="Window8" Height="450" Width="800">
     <Viewbox x:Name="RootViewbox" Stretch="None">
         <Grid>
-        <DataGrid  x:Name="datagrid" Width="auto" RenderTransformOrigin="-0.075,0.029" Margin="0,49,0,56.667"/>
-        <Button x:Name="player_character_data" Content="player character" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Click="Player_character_data_Click"/>
-        <Button x:Name="player_info" Content="player info" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.178,-0.446" Click="Player_info_Click"/>
-        <Button x:Name="print" Content="print" Margin="504,1,175.333,377.667" Width="114" RenderTransformOrigin="-0.113,-0.265" Height="42" Click="Print_Click" HorizontalAlignment="Center">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="1.736"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-1.61"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <Button x:Name="back" Content="back to player_character" Margin="626,0,10.333,377.667" Click="Back_Click"/>
-            <Button x:Name="specialization" Content="specialization" HorizontalAlignment="Left" Margin="165,0,0,0" VerticalAlignment="Top" Width="89" Click="Specialization_Click"/>
-            <Button x:Name="weapon_type" Content="weapon type" HorizontalAlignment="Left" Margin="259,0,0,0" VerticalAlignment="Top" Width="88" Click="Weapon_type_Click"/>
-            <Button x:Name="weapon" Content="weapon" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" Width="75" Click="Weapon_Click"/>
-            <Button x:Name="armor" Content="armor" HorizontalAlignment="Left" Margin="90,24,0,0" VerticalAlignment="Top" Width="75" Click="Armor_Click"/>
-            <Button x:Name="player_Level" Content="player level" HorizontalAlignment="Left" Margin="170,24,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.062,0.586" Click="Player_Level_Click"/>
-            <Button x:Name="weapon_class" Content="weapon Class" HorizontalAlignment="Left" Margin="259,25,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="-0.138,1.379" Click="Weapon_class_Click"/>
+            <DataGrid  x:Name="datagrid" Width="auto" RenderTransformOrigin="-0.075,0.029" Margin="0,49,0,56.667"/>
+            <Button x:Name="player_character_data" Content="player character" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Click="Player_character_data_Click" Margin="0,5,0,0"/>
+            <Button x:Name="player_info" Content="player info" HorizontalAlignment="Left" Margin="93,5,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.178,-0.446" Click="Player_info_Click"/>
+            <Button x:Name="print" Content="print" Margin="504,4,175,375" Width="114" RenderTransformOrigin="-0.113,-0.265" Height="42" Click="Print_Click" HorizontalAlignment="Center">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="1.736"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-1.61"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="back" Content="back to player_character" Margin="626,3,10,375" Click="Back_Click"/>
+            <Button x:Name="specialization" Content="specialization" HorizontalAlignment="Left" Margin="171,5,0,0" VerticalAlignment="Top" Width="89" Click="Specialization_Click"/>
+            <Button x:Name="weapon_type" Content="weapon type" HorizontalAlignment="Left" Margin="263,5,0,0" VerticalAlignment="Top" Width="92" Click="Weapon_type_Click"/>
+            <Button x:Name="weapon" Content="weapon" HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" Width="90" Click="Weapon_Click"/>
+            <Button x:Name="armor" Content="armor" HorizontalAlignment="Left" Margin="93,27,0,0" VerticalAlignment="Top" Width="75" Click="Armor_Click"/>
+            <Button x:Name="player_Level" Content="player level" HorizontalAlignment="Left" Margin="171,27,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="1.062,0.586" Click="Player_Level_Click"/>
+            <Button x:Name="weapon_class" Content="weapon Class" HorizontalAlignment="Left" Margin="263,27,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="-0.138,1.379" Click="Weapon_class_Click"/>
 
         </Grid>
     </Viewbox>

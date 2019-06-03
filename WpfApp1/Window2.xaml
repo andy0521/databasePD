@@ -217,7 +217,7 @@
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
-                        <TextBlock FontStyle="Italic" Text="請輸入武器分類的Id"/>
+                        <TextBlock FontStyle="Italic" Text="請輸入武器分類Id"/>
                     </VisualBrush.Visual>
                 </VisualBrush>
             </TextBox.Resources>

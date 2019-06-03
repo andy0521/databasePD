@@ -351,5 +351,10 @@ namespace WpfApp1
                 MessageBox.Show("search ok");
             }
         }
+
+        private void Hp_plus_txbx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
