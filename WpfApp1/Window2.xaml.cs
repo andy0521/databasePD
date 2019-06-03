@@ -27,6 +27,7 @@ namespace WpfApp1
     public partial class Window2 : Window
     {
         OracleConnection con = null;
+        private String sql = "select*from specialization order by spec_id";
         public Window2()
         {
             this.setConnection();
@@ -41,9 +42,7 @@ namespace WpfApp1
         }
         private void updateDataGrid()
         {
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select*from specialization order by spec_id";
-            cmd.CommandType = CommandType.Text;
+            OracleCommand cmd = new OracleCommand(sql, con);
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
@@ -172,6 +171,8 @@ namespace WpfApp1
         private void Reset_btn_Click(object sender, RoutedEventArgs e)
         {
             this.resetAll();
+            sql = "select*from specialization order by spec_id";
+            updateDataGrid();
         }
         private void AUD(String sql_stmt, int statue)
         {
@@ -312,6 +313,21 @@ namespace WpfApp1
             
 
         }
-        
+        private void Search_btn_Click(object sender, RoutedEventArgs e)
+        {
+            sql = "select * from specialization where spec_id=:spec_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("spec_id", OracleDbType.NChar).Value = spec_id_txbx.Text.ToString();
+
+            OracleDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            myDataGrid.ItemsSource = dt.DefaultView;
+            dr.Close();
+            MessageBox.Show("search ok");
+        }
+
     }
 }

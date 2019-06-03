@@ -24,6 +24,7 @@ namespace WpfApp1
     public partial class Window1 : Window
     {
         OracleConnection con = null;
+        private String sql = "select * from player_info order by player_id";
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
@@ -38,9 +39,8 @@ namespace WpfApp1
         }
         private void updateDataGrid()
         {
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from player_info order by player_id";
-            cmd.CommandType = CommandType.Text;
+            OracleCommand cmd = new OracleCommand(sql, con);
+
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
@@ -169,6 +169,8 @@ namespace WpfApp1
         private void Reset_btn_Click(object sender, RoutedEventArgs e)
         {
             this.resetAll();
+            sql = "select * from player_info order by player_id";
+            updateDataGrid();
         }
         private void AUD(String sql_stmt, int statue)
         {
@@ -213,6 +215,8 @@ namespace WpfApp1
                 {
 
                     MessageBox.Show(msg);
+                    sql = "select * from player_info order by player_id";
+                   
                     this.updateDataGrid();
                 }
             }
@@ -305,5 +309,20 @@ namespace WpfApp1
 
 
         }
+           private void Search_btn_Click(object sender, RoutedEventArgs e)
+        {
+            sql = "select * from player_info where player_id=:playerid";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("playerid", OracleDbType.NChar).Value = Player_Id_txbx.Text.ToString();
+            OracleDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            myDataGrid.ItemsSource = dt.DefaultView;
+            dr.Close();
+            MessageBox.Show("search ok");
+        }
+
     }
 }

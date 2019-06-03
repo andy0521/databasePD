@@ -43,7 +43,9 @@
         <Button x:Name="player_level_btn" Content="player_Level" Grid.Column="2" HorizontalAlignment="Left" Margin="148,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Player_level_btn_Click"/>
         <Button x:Name="weapon_class_btn" Content="weapon_Class" Grid.Column="2" HorizontalAlignment="Left" Margin="230.333,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Weapon_class_btn_Click"/>
         <Button Content="print" Grid.Column="2" HorizontalAlignment="Left" Margin="177.333,377,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button x:Name="search_btn" Content="search" Grid.Column="1" HorizontalAlignment="Left" Margin="25.667,377,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Click="Search_btn_Click"/>
         <TextBox x:Name="Player_Id_txbx" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"   VerticalAlignment="Top" Width="120" Margin="103,133,0,0" Grid.Column="2" Grid.RowSpan="2" MaxLength="16">
+          
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>

@@ -72,7 +72,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="pd_weighted_txbx" HorizontalAlignment="Left" Height="23" Margin="103,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2">
+        <TextBox x:Name="pd_weighted_txbx" HorizontalAlignment="Left" Height="23" Margin="103,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
@@ -93,7 +93,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="md_weighted_txbx" HorizontalAlignment="Left" Height="23" Margin="103,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.392,-0.826">
+        <TextBox x:Name="md_weighted_txbx" HorizontalAlignment="Left" Height="23" Margin="103,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.392,-0.826" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
@@ -114,7 +114,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="speed_weighted_txbx" HorizontalAlignment="Left" Height="23" Margin="103,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2">
+        <TextBox x:Name="speed_weighted_txbx" HorizontalAlignment="Left" Height="23" Margin="103,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
@@ -135,7 +135,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="dodge_weighted_txbx" HorizontalAlignment="Left" Height="23" Margin="103,282,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2">
+        <TextBox x:Name="dodge_weighted_txbx" HorizontalAlignment="Left" Height="23" Margin="103,282,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
@@ -156,7 +156,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="hp_plus_txbx" HorizontalAlignment="Left" Height="23" Margin="104,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.447,1.435">
+        <TextBox x:Name="hp_plus_txbx" HorizontalAlignment="Left" Height="23" Margin="104,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.447,1.435" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
@@ -177,7 +177,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="mp_plus_txbx" HorizontalAlignment="Left" Height="23" Margin="103,344,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.436,1.957">
+        <TextBox x:Name="mp_plus_txbx" HorizontalAlignment="Left" Height="23" Margin="103,344,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.436,1.957" MaxLength="5">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
@@ -198,7 +198,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <TextBox x:Name="durability_txbx" HorizontalAlignment="Left" Height="23" Margin="103,380,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.536,2.362">
+        <TextBox x:Name="durability_txbx" HorizontalAlignment="Left" Height="23" Margin="103,380,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.536,2.362" MaxLength="3">
             <TextBox.Resources>
                 <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
                     <VisualBrush.Visual>
@@ -232,5 +232,6 @@
         <Button x:Name="player_level_btn" Content="player_Level" Grid.Column="2" HorizontalAlignment="Left" Margin="148,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Player_level_btn_Click"/>
         <Button x:Name="weapon_class_btn" Content="weapon_Class" Grid.Column="2" HorizontalAlignment="Left" Margin="238,61,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Weapon_class_btn_Click"/>
         <Button Content="print" Grid.Column="2" HorizontalAlignment="Left" Margin="185,464,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button x:Name="search_btn" Content="search" Grid.Column="2" HorizontalAlignment="Left" Margin="0,464,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="Search_btn_Click"/>
     </Grid>
 </Window>

@@ -24,6 +24,7 @@ namespace WpfApp1
     public partial class Window5 : Window
     {
         OracleConnection con = null;
+       private String sql =   "select*from armor order by armor_id";
         public Window5()
         {
             this.setConnection();
@@ -37,11 +38,7 @@ namespace WpfApp1
         }
         private void updateDataGrid()
         {
-            OracleCommand cmd = con.CreateCommand();
-
-            cmd.CommandText = "select*from armor order by armor_id";
-            cmd.CommandType = CommandType.Text;
-
+            OracleCommand cmd = new OracleCommand(sql, con);
 
 
             OracleDataReader dr = cmd.ExecuteReader();
@@ -178,6 +175,8 @@ namespace WpfApp1
         private void Reset_btn_Click(object sender, RoutedEventArgs e)
         {
             this.resetAll();
+            sql = "select*from armor order by armor_id";
+            updateDataGrid();
         }
         private void AUD(String sql_stmt, int statue)
         {
@@ -189,8 +188,8 @@ namespace WpfApp1
             {
                 case 0:
                     msg = "Row Inserted Successfully!";
-                    cmd.Parameters.Add("armor_id", OracleDbType.Varchar2, 16).Value = armor_id_txbx.Text;
-                    cmd.Parameters.Add("armor_name", OracleDbType.Varchar2, 20).Value = armor_name_txbx.Text;
+                    cmd.Parameters.Add("armor_id", OracleDbType.Int32, 4).Value = Int32.Parse(armor_id_txbx.Text);
+                    cmd.Parameters.Add("armor_name", OracleDbType.Varchar2, 30).Value = armor_name_txbx.Text;
                     cmd.Parameters.Add("pd_weighted", OracleDbType.Varchar2, 5).Value = pd_weighted_txbx.Text;
                     cmd.Parameters.Add("md_weighted", OracleDbType.Varchar2, 5).Value = md_weighted_txbx.Text;
                     cmd.Parameters.Add("speed_weighted", OracleDbType.Varchar2, 5).Value = speed_weighted_txbx.Text;
@@ -231,6 +230,7 @@ namespace WpfApp1
                 {
 
                     MessageBox.Show(msg);
+                    sql = "select*from armor order by armor_id";
                     this.updateDataGrid();
                 }
             }
@@ -317,6 +317,20 @@ namespace WpfApp1
 
 
 
+        }
+        private void Search_btn_Click(object sender, RoutedEventArgs e)
+        {
+            sql = "select * from armor where armor_id=:armor_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("armor_id", OracleDbType.NChar).Value = armor_id_txbx.Text.ToString();
+            OracleDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            myDataGrid.ItemsSource = dt.DefaultView;
+            dr.Close();
+            MessageBox.Show("search ok");
         }
     }
 }

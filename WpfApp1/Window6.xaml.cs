@@ -24,6 +24,7 @@ namespace WpfApp1
     public partial class Window6 : Window
     {
         OracleConnection con = null;
+        private String sql = "select* from player_level order by player_level" ;
         public Window6()
         {
             this.setConnection();
@@ -37,11 +38,10 @@ namespace WpfApp1
         }
         private void updateDataGrid()
         {
-            OracleCommand cmd = con.CreateCommand();
+            
 
-            cmd.CommandText = "select*from player_level order by player_level" ;
-            cmd.CommandType = CommandType.Text;
-
+            
+            OracleCommand cmd = new OracleCommand(sql, con);
 
 
             OracleDataReader dr = cmd.ExecuteReader();
@@ -173,6 +173,8 @@ namespace WpfApp1
         private void Reset_btn_Click(object sender, RoutedEventArgs e)
         {
             this.resetAll();
+            sql = "select* from player_level order by player_level";
+            updateDataGrid();
         }
         private void AUD(String sql_stmt, int statue)
         {
@@ -222,6 +224,7 @@ namespace WpfApp1
                 {
 
                     MessageBox.Show(msg);
+                    sql = "select* from player_level order by player_level";
                     this.updateDataGrid();
                 }
             }
@@ -306,6 +309,20 @@ namespace WpfApp1
 
 
 
+        }
+        private void Search_btn_Click(object sender, RoutedEventArgs e)
+        {
+            sql = "select * from player_level where player_level=:player_level";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("player_level", OracleDbType.NChar).Value = player_level_txbx.Text.ToString();
+            OracleDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            myDataGrid.ItemsSource = dt.DefaultView;
+            dr.Close();
+            MessageBox.Show("search ok");
         }
     }
 }

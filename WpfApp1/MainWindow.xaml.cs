@@ -25,6 +25,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         OracleConnection con = null;
+        private String sql = "select*from player_character order by player_id";
         public MainWindow()
         {
 
@@ -34,12 +35,9 @@ namespace WpfApp1
         }
         private void updateDataGrid()
         {
-            OracleCommand cmd = con.CreateCommand();
-     
-            cmd.CommandText = "select*from player_character order by player_id";
-            cmd.CommandType = CommandType.Text;
-            
-          
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+
 
             OracleDataReader dr = cmd.ExecuteReader();
               DataTable dt = new DataTable();
@@ -73,7 +71,7 @@ namespace WpfApp1
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
 
-            String sql = "select count(*) from player_character where player_id=:playerid";
+         sql = "select count(*) from player_character where player_id=:playerid";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
@@ -102,7 +100,7 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "select count(*) from player_character where player_id=:playerid";
+            sql = "select count(*) from player_character where player_id=:playerid";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
@@ -171,6 +169,9 @@ namespace WpfApp1
         private void Reset_btn_Click(object sender, RoutedEventArgs e)
         {
             this.resetAll();
+            sql = "select*from player_character order by player_id";
+            updateDataGrid();
+             
         }
         private void AUD (String sql_stmt, int statue)
         {
@@ -225,7 +226,8 @@ namespace WpfApp1
                 {
 
                 MessageBox.Show(msg);
-                this.updateDataGrid();
+                    sql = "select*from player_character order by player_id";
+                    this.updateDataGrid();
                 }
             }
             catch(Exception expe)    {
@@ -301,6 +303,21 @@ namespace WpfApp1
 
 
 
+        }
+
+        private void Search_btn_Click(object sender, RoutedEventArgs e)
+        {
+            sql = "select * from player_character where player_id=:playerid";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("playerid", OracleDbType.NChar).Value = Player_Id_txbx.Text.ToString();
+            OracleDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            myDataGrid.ItemsSource = dt.DefaultView;
+            dr.Close();
+            MessageBox.Show("search ok");
         }
     }
 }

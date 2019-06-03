@@ -23,6 +23,7 @@ namespace WpfApp1
     public partial class Window4 : Window
     {
         OracleConnection con = null;
+        private String sql = "select* from weapon order by weapon_id";
         public Window4()
         {
             this.setConnection();
@@ -37,9 +38,7 @@ namespace WpfApp1
         }
         private void updateDataGrid()
         {
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select*from weapon order by weapon_id";
-            cmd.CommandType = CommandType.Text;
+            OracleCommand cmd = new OracleCommand(sql, con);
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
@@ -162,6 +161,8 @@ namespace WpfApp1
         private void Reset_btn_Click(object sender, RoutedEventArgs e)
         {
             this.resetAll();
+            sql = "select* from weapon order by weapon_id";
+            updateDataGrid();
         }
         private void AUD(String sql_stmt, int statue)
         {
@@ -206,6 +207,7 @@ namespace WpfApp1
                 {
 
                     MessageBox.Show(msg);
+                    sql = "select* from weapon order by weapon_id";
                     this.updateDataGrid();
                 }
             }
@@ -286,6 +288,21 @@ namespace WpfApp1
 
 
         }
+            private void Search_btn_Click(object sender, RoutedEventArgs e)
+        {
+            sql = "select * from weapon where weapon_id=:weapon_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("weapon_id", OracleDbType.NChar).Value = weapon_id_txbx.Text.ToString();
+            OracleDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            myDataGrid.ItemsSource = dt.DefaultView;
+            dr.Close();
+            MessageBox.Show("search ok");
+        }
     }
+
 }
 

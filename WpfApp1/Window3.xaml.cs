@@ -23,6 +23,7 @@ namespace WpfApp1
     public partial class Window3 : Window
     {
         OracleConnection con = null;
+       private String sql =  "select*from weapon_type order by weapon_type_id";
         public Window3()
         {
             this.setConnection();
@@ -37,9 +38,7 @@ namespace WpfApp1
         }
         private void updateDataGrid()
         {
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select*from weapon_type order by weapon_type_id";
-            cmd.CommandType = CommandType.Text;
+            OracleCommand cmd = new OracleCommand(sql, con);
             OracleDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
@@ -160,6 +159,8 @@ namespace WpfApp1
         private void Reset_btn_Click(object sender, RoutedEventArgs e)
         {
             this.resetAll();
+            sql = "select*from weapon_type order by weapon_type_id";
+            updateDataGrid();
         }
         private void AUD(String sql_stmt, int statue)
         {
@@ -172,14 +173,14 @@ namespace WpfApp1
                 case 0:
                     msg = "Row Inserted Successfully!";
                     cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_id_txbx.Text);
-                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 3).Value = Int32.Parse(weapon_type_id_txbx.Text);
+                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 3).Value = Int32.Parse(weapon_class_id_txbx.Text);
                     cmd.Parameters.Add("weapon_type_name", OracleDbType.Varchar2, 20).Value = weapon_type_name_txbx.Text;
                 
 
                     break;
                 case 1:
                     msg = "Row Update Successfully!";
-                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 3).Value = Int32.Parse(weapon_type_id_txbx.Text);
+                    cmd.Parameters.Add("weapon_class_id", OracleDbType.Int32, 3).Value = Int32.Parse(weapon_class_id_txbx.Text);
                     cmd.Parameters.Add("weapon_type_name", OracleDbType.Varchar2, 20).Value = weapon_type_name_txbx.Text;
                     cmd.Parameters.Add("weapon_type_id", OracleDbType.Int32, 4).Value = Int32.Parse(weapon_type_id_txbx.Text);
 
@@ -200,6 +201,7 @@ namespace WpfApp1
                 {
 
                     MessageBox.Show(msg);
+                    sql = "select*from weapon_type order by weapon_type_id";
                     this.updateDataGrid();
                 }
             }
@@ -279,6 +281,20 @@ namespace WpfApp1
 
 
 
+        }
+        private void Search_btn_Click(object sender, RoutedEventArgs e)
+        {
+            sql = "select * from weapon_type where weapon_type_id=:weapon_type_id";
+
+            OracleCommand cmd = new OracleCommand(sql, con);
+
+            cmd.Parameters.Add("weapon_type_id", OracleDbType.NChar).Value = weapon_type_id_txbx.Text.ToString();
+            OracleDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            myDataGrid.ItemsSource = dt.DefaultView;
+            dr.Close();
+            MessageBox.Show("search ok");
         }
     }
 }
