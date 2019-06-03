@@ -22,7 +22,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="back" Content="back to player_character" Margin="636,0,10.333,368.667" Width="147" Height="52" Click="Back_Click"/>
+        <Button x:Name="back" Content="back to player_character" Margin="626,0,10.333,377.667" Click="Back_Click"/>
             <Button x:Name="specialization" Content="specialization" HorizontalAlignment="Left" Margin="165,0,0,0" VerticalAlignment="Top" Width="89" Click="Specialization_Click"/>
             <Button x:Name="weapon_type" Content="weapon type" HorizontalAlignment="Left" Margin="259,0,0,0" VerticalAlignment="Top" Width="88" Click="Weapon_type_Click"/>
             <Button x:Name="weapon" Content="weapon" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" Width="75" Click="Weapon_Click"/>
