@@ -100,7 +100,7 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "select count(*) from armor where armor_id=:armor_id";
+             sql = "select count(*) from armor where armor_id=:armor_id";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
@@ -320,17 +320,36 @@ namespace WpfApp1
         }
         private void Search_btn_Click(object sender, RoutedEventArgs e)
         {
-            sql = "select * from armor where armor_id=:armor_id";
+            sql = "select count(*) from armor where armor_id=:armor_id";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
             cmd.Parameters.Add("armor_id", OracleDbType.NChar).Value = armor_id_txbx.Text.ToString();
-            OracleDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            myDataGrid.ItemsSource = dt.DefaultView;
-            dr.Close();
-            MessageBox.Show("search ok");
+
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此armor_id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "select * from armor where armor_id=:armor_id";
+
+                 cmd = new OracleCommand(sql, con);
+
+                cmd.Parameters.Add("armor_id", OracleDbType.NChar).Value = armor_id_txbx.Text.ToString();
+                OracleDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                myDataGrid.ItemsSource = dt.DefaultView;
+                dr.Close();
+                MessageBox.Show("search ok");
+            }
         }
     }
 }

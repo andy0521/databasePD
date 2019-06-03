@@ -98,7 +98,7 @@ namespace WpfApp1
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            String sql = "select count(*) from specialization where spec_id=:spec_id";
+            sql = "select count(*) from specialization where spec_id=:spec_id";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
@@ -315,18 +315,37 @@ namespace WpfApp1
         }
         private void Search_btn_Click(object sender, RoutedEventArgs e)
         {
-            sql = "select * from specialization where spec_id=:spec_id";
+            sql = "select count(*) from specialization where spec_id=:spec_id";
 
             OracleCommand cmd = new OracleCommand(sql, con);
 
             cmd.Parameters.Add("spec_id", OracleDbType.NChar).Value = spec_id_txbx.Text.ToString();
 
-            OracleDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            myDataGrid.ItemsSource = dt.DefaultView;
-            dr.Close();
-            MessageBox.Show("search ok");
+            int datarow = Convert.ToInt32(cmd.ExecuteScalar());
+            if (datarow == 0)
+            {
+                String msg = "此specialization_Id未被使用";
+                MessageBox.Show(msg);
+                cmd.Cancel();
+
+
+                return;
+            }
+            else
+            {
+                sql = "select * from specialization where spec_id=:spec_id";
+
+                cmd = new OracleCommand(sql, con);
+
+                cmd.Parameters.Add("spec_id", OracleDbType.NChar).Value = spec_id_txbx.Text.ToString();
+
+                OracleDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                myDataGrid.ItemsSource = dt.DefaultView;
+                dr.Close();
+                MessageBox.Show("search ok");
+            }
         }
 
     }
